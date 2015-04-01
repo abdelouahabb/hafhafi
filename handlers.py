@@ -21,21 +21,24 @@ class MainHandler(tornado.web.RequestHandler):
         self.name = user_agents.parse(a).browser.family
         self.version = user_agents.parse(a).browser.version[0]
         if self.name in ["Chrome", "Firefox", "Opera", "Chrome Mobile", "Firefox Mobile", "Opera Mobile"] and self.version > 25:
-            x_real_ip = self.request.headers.get("X-Real-IP")
+            x_real_ip = self.request.headers.get("x-forwarded-for")
             self.db = motor.MotorClient().meteo
-            self.now = datetime.datetime.now()
+            self.now = datetime.datetime.utcnow() + datetime.timedelta(hours=1)
             self.remote_ip = self.request.remote_ip if not x_real_ip else x_real_ip
-            self.jour = datetime.datetime.today().weekday()
-            self.today = datetime.datetime.today
-            self.key = "get your free world weather map api key from https://developer.worldweatheronline.com/ "
-            self.heure = datetime.datetime.today().hour
+            self.jour = (datetime.datetime.utcnow()+ datetime.timedelta(hours=1)).weekday()
+            self.today = (datetime.datetime.utcnow()+ datetime.timedelta(hours=1)).today()
+            self.key = "your key"
+            self.heure = (datetime.datetime.utcnow()+ datetime.timedelta(hours=1)).hour
             
 
 class IndexHandler(MainHandler):
     @tornado.gen.coroutine
     def get(self):
         if self.name not in ["Chrome", "Firefox", "Opera", "Chrome Mobile", "Firefox Mobile", "Opera Mobile"]:
-            self.write("<h1>روح تيليشارجي كروم ولا أوبرا ولا فايرفوكس و رواح</h1>")
+            if self.name == "IE":
+                self.redirect("/iedanger")
+            else:
+                self.write("<h1>روح تيليشارجي كروم ولا أوبرا ولا فايرفوكس و رواح</h1>")
         else:
             if self.version > 25:
                 if (yield self.db.visit.find_one({"_id":self.remote_ip})) and (yield self.db.visit.find_one({"_id":self.remote_ip}))["ban"] > 4:
@@ -45,7 +48,7 @@ class IndexHandler(MainHandler):
                     if self.name == "Firefox":
                         fox = "fox"
                     http_client = AsyncHTTPClient()
-                    response = yield http_client.fetch("http://ip-api.com/json/105.107.100.16") # use this when you test at home
+                    response = yield http_client.fetch("http://ip-api.com/json/105.107.100.16") # use this when you test at home to test (must have internet)
                     #response = yield http_client.fetch("http://ip-api.com/json/{0}".format(self.remote_ip)) # use this when you deploy
                     res = json_decode(response.body)
                     info = [res["countryCode"], res["country"], res["isp"]]
@@ -55,8 +58,13 @@ class IndexHandler(MainHandler):
                                         "$inc":{"ban":0},
                                         "$addToSet":{"brow":[self.name, self.version]}},
                                         upsert=True)
+                    yield self.db.visit.update({"_id":self.remote_ip},
+                                       {"$inc":{"num":1},
+                                        "$inc":{"ban":0},
+                                        "$addToSet":{"brow":[self.name, self.version]}},
+                                        upsert=True)
                     exist = yield self.db.users.find_one({"_id":"vil"})
-                    if (exist and len(exist["rq"]) > 10 and self.now < (exist["tm"] + datetime.timedelta(hours=4))):
+                    if (exist and len(exist["rq"]) > 10 and self.now < (exist["tm"] + datetime.timedelta(hours=5))):
                         req = exist["rq"]
                         self.render("index.html",
                                     res=json_decode(req)["data"]["weather"],
@@ -74,7 +82,7 @@ class IndexHandler(MainHandler):
                                     extra="isDayTime")
                         yield tornado.gen.Task(ioloop.IOLoop.instance().add_timeout, time.time() + 2)
                         yield self.db.users.update({"_id":"vil"},
-                                                   {"$set":{"tm":datetime.datetime.now(),
+                                                   {"$set":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),
                                                             "rq":json_encode(wwo.result)}},
                                                     upsert=True)
                         self.render("index.html",
@@ -90,6 +98,10 @@ class Hack(MainHandler):
     @tornado.gen.coroutine
     def get(self):
         self.render("hack.html")
+        
+class IE(MainHandler):
+    def get(self):
+        self.render("iedanger.html")
 
 
 class DetailModule(tornado.web.UIModule):
@@ -105,7 +117,7 @@ class JawModule(tornado.web.UIModule):
 
 class AstroModule(tornado.web.UIModule):
     def render(self, res):
-        jour = datetime.datetime.today().weekday()
+        jour = (datetime.datetime.utcnow()+ datetime.timedelta(hours=1)).weekday()
         return self.render_string("modules/astro.html", res=res, days=days, jour=jour)
 
 class Geo(tornado.web.UIModule):
@@ -118,15 +130,15 @@ class LatLon(MainHandler):
         exist = yield self.db.users.find_one({"_id":self.remote_ip})
         e = self.get_cookie("_thd")
         if exist:
-            if (e != None and self.now < (exist["tm"] + datetime.timedelta(hours=4))):
-                w = str(exist["tm"] + datetime.timedelta(hours=4))[10:16]
+            if (e != None and self.now < (exist["tm"] + datetime.timedelta(hours=5))):
+                w = str(exist["tm"] + datetime.timedelta(hours=5))[10:16]
                 a = '''
                 <div class="ui basic modal" id="back"><div class="header"><i class="announcement icon"></i> أصبر شوي
                 </div><div class="content"><div class="image"><i class="wait icon"></i></div><div class="description">
-                <h1> باش تلڤى الجديد ولي على {} لأن السيت يتحدث كل 4 سوايع </h1></div></div><div class="actions"><div class="one fluid ui inverted buttons">
+                <h1> باش تلڤى الجديد ولي على {}  </h1></div></div><div class="actions"><div class="one fluid ui inverted buttons">
                 <div class="ui green ok basic inverted massive button"><i class="thumbs outline up icon"></i>  نستنى </div></div></div></div>'''.format(w)
                 self.write(a)
-            elif (e == None and len(exist["rq"]) > 10 and self.now < (exist["tm"] + datetime.timedelta(hours=4))):
+            elif (e == None and len(exist["rq"]) > 10 and self.now < (exist["tm"] + datetime.timedelta(hours=5))):
                 req = (yield self.db.users.find_one({"_id":self.remote_ip}))["rq"]
                 a = json_decode(req)
                 self.set_cookie("_thd", str(uuid4())) # this is to handle different browsers in the same ip
@@ -143,7 +155,7 @@ class LatLon(MainHandler):
                             extra="isDayTime")
                 yield tornado.gen.Task(ioloop.IOLoop.instance().add_timeout, time.time() + 2)
                 yield self.db.users.update({"_id":self.remote_ip},
-                                           {"$set":{"tm":datetime.datetime.now(),
+                                           {"$set":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),
                                                     "rq":json_encode(wwo.result)}},
                                             upsert=True)
                 self.set_cookie("_thd", str(uuid4())) # this is to handle different browsers in the same ip
@@ -160,7 +172,7 @@ class LatLon(MainHandler):
                         extra="isDayTime")
             yield tornado.gen.Task(ioloop.IOLoop.instance().add_timeout, time.time() + 2)
             yield self.db.users.update({"_id":self.remote_ip},
-                                       {"$set":{"tm":datetime.datetime.now(),
+                                       {"$set":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),
                                                 "rq":json_encode(wwo.result)}},
                                         upsert=True)
             self.set_cookie("_thd", str(uuid4())) # this is to handle different browsers in the same ip
@@ -182,7 +194,7 @@ class Message(MainHandler):
             <div class="header">
             <i class="red heart icon"></i></div><div class="content"><div class="description"><h1>صحيــــت</h1></div></div>'''
             yield self.db.message.update({"_id":self.remote_ip},
-                                   {"$push":{"tm":datetime.datetime.now(),
+                                   {"$push":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),
                                             "msg":msg}},
                                     upsert=True)
         else:
@@ -194,7 +206,8 @@ class Message(MainHandler):
                 <i class="huge yellow frown icon"></i></div><div class="content"><div class="description"><h1>لاه راك تدير هكذا !</h1></div></div>'''
             else:
                 resp = '''
-                <script>location.reload(true);</script>'''
+                <div class="header">
+                <i class="huge red frown icon"></i></div><div class="content"><div class="description"><h1>لاه راك تدير هكذا !</h1></div></div>'''
         self.write(resp)
         
 
@@ -204,7 +217,7 @@ class Admin(MainHandler):
         admin = yield self.db.admin.find().count()
         if admin == 0:
             self.render("register.html")
-        else:
+        elif admin == 1:
             self.render("login.html")
 
 
@@ -226,7 +239,7 @@ class Register(MainHandler):
         yield self.db.admin.insert({"_id":id,
                               "pwd":ps
                               })
-        self.redirect("/adminos")
+        self.redirect("/admination")
 
 
 class Login(MainHandler):

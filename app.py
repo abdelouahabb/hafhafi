@@ -5,8 +5,13 @@ import tornado.httpserver
 from tornado.options import define, options
 import handlers, os
 
-define("port",default=8000,type=int)
-#define("address",default="192.168.1.4") 
+
+# this is setting for openshift
+ip   = os.environ['OPENSHIFT_PYTHON_IP']
+port = int(os.environ['OPENSHIFT_PYTHON_PORT'])
+# use below if you develop it in your laptop
+#define("port",default=8080,type=int)
+#define("address",default="localhost")  # try to use your wlan or lan address to get the best,
 # if you want to test on your machine, avoid localhost, use your wifi address,
 # so you can test easily offline app, by stopping the server.
 
@@ -15,10 +20,11 @@ urls = [
     (r"/hack", handlers.Hack),
     (r"/latlon", handlers.LatLon),
     (r"/msg", handlers.Message),
-    (r"/adminos", handlers.Admin), # please avoid making admin pages named admin ...
+    (r"/admination", handlers.Admin), # please avoid making admin pages named admin ...
     (r"/reg", handlers.Register),
     (r"/login", handlers.Login),
     (r"/comments", handlers.Comments),
+    (r"/iedanger", handlers.IE),
     (r"/bsod", handlers.BSOD),
     (r"/(.*)", tornado.web.StaticFileHandler, {"path":r"{0}".format(os.path.dirname(__file__))}),
 ]
@@ -28,7 +34,7 @@ settings = dict({
     "static_path": os.path.join(os.path.dirname(__file__),"static"),
     "cookie_secret": os.urandom(12),
     "xsrf_cookies": True,
-    "debug": True,
+    "debug": False,
     "compress_response": True,
     "login_url": "/login",
     "ui_modules":
@@ -48,5 +54,5 @@ if __name__ == "__main__":
     options.parse_command_line()
     server = tornado.httpserver.HTTPServer(application)
     #server.listen(options.port, options.address) # uncomment this if you use your wifi address so you can test better
-    server.listen(options.port)
+    server.listen(port, ip)
     tornado.ioloop.IOLoop.instance().start()

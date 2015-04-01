@@ -1,8 +1,5 @@
 # hafhafi
-This is simple forecast application that will work offline! 
 
-you need to grab an api key from https://developer.worldweatheronline.com/
+A forecast application that works offline ^_^
 
-If you want to see how it works, check here http://meteodz-meteodz.rhcloud.com/
-
-NB: I made it to learn how offline application work, and how Semantic UI works ... and at the end, I found that I should learn Angular too :'( ... maybe next time :D
+Just go grab your api key from https://developer.worldweatheronline.com/ and use the latest chrome to enjoy how offline applications works ^_^

@@ -23,8 +23,8 @@
 {% end %}
 
 <h1 class="ui horizontal header divider" id="bled">
-    <i class="blue travel icon"></i>
-    اليوم في سطيـــف
+    <i class="blue travel icon"></i> 
+اليوم في سطيـــف (هاذي ماشي معناه راك في سطيف، لازم تكليكي على جيب وين راني باش نجيبلك وين راك) 
  </h1>
 
 {% module Geo() %}
@@ -36,7 +36,16 @@
 <input type="hidden" id="day" value="{{jour}}"/>
 <div id="nocon"></div>
 </div>
+
+
+<div class="ui centered grid">
+	<div class="ui fourteen wide column"><div class="ui all stacked blue segment">
+	Powered by <a href="http://www.worldweatheronline.com/" title="Free Weather API" target="_blank">World Weather Online</a>
+<a href="https://developer.worldweatheronline.com/" target="_blank"><img class="ui round image" alt="Weather API" src="http://cdn.worldweatheronline.net/staticv3/images/logo_small.png" style="border-style:solid; border-width:0px; height:43px; width:100px" /></a>
+</div>
+</div>
+</div>
 {% module Contact() %}
-<!-- 
-{% include footer.html %}
-!-->
+
+</body>
+</html>
