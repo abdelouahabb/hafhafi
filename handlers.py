@@ -239,7 +239,7 @@ class Register(MainHandler):
         yield self.db.admin.insert({"_id":id,
                               "pwd":ps
                               })
-        self.redirect("/admination")
+        self.redirect("/admin")
 
 
 class Login(MainHandler):
@@ -250,12 +250,19 @@ class Login(MainHandler):
         dbpwd = (yield self.db.admin.find_one({"_id":id}))["pwd"] # trust the admin, no need to verify!
         print dbpwd
         if pbkdf2_sha512.verify(pwd, dbpwd) == True:
+            self.set_secure_cookie("admin", id)
             self.redirect("/comments")
         else:
             self.write("baaaaad!")
         
+
+class Auth(tornado.web.RequestHandler):
+    def get_current_user(self):
+        return self.get_secure_cookie("admin")
         
-class Comments(MainHandler):
+# let the magic of multiple inheritece ;)
+class Comments(MainHandler, Auth):
+    @tornado.web.authenticated
     @tornado.gen.coroutine
     def get(self):
         cursor = self.db.message.find()
