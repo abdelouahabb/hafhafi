@@ -1,0 +1,30 @@
+body {
+    background:#0000aa;
+    color:#ffffff;
+    font-family:courier;
+    font-size:12pt;
+    text-align:center;
+    margin:100px;
+}
+
+blink {
+    color:yellow;
+    font-weight: bolder;
+    -webkit-animation: blink .5s alternate infinite;
+    -moz-animation: blink .5s alternate infinite;
+}
+
+.neg {
+    background:#fff;
+    color:#0000aa;
+    padding:2px 8px;
+    font-weight:bold;
+}
+
+p {
+    margin:30px 100px;
+}
+
+
+@-webkit-keyframes blink {from {opacity: 0} to {opacity: 1}}
+@-moz-keyframes blink {from {opacity: 0} to {opacity: 1}}

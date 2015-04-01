@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html manifest="meteo.appcache">
+  <head>
+  	<meta charset="UTF-8">
+  	<title>Admiiiiiin</title>
+  	<link rel="stylesheet" href="static/css/semantic.min.css" />
+  	<script src="static/js/jquery-2.1.1.min.js"></script>
+  	<script src="static/js/semantic.min.js"></script>
+	<script src="static/js/register.js"></script>	
+ </head>
+ 
+<body>
+<br />
+
+<div class="ui centered grid">
+	<div class="six wide column">
+		<div class="ui segment">
+
+			<form class="ui form" id="register" method="post" action="/reg">
+				<h4 class="ui dividing header"><i class="add user icon"></i></h4>
+				{% raw xsrf_form_html() %}
+				
+				
+					<div class="required field">
+						<label>Email</label>
+						<div class="ui icon input">
+							<input type="email" name="email"> <i
+								class="mail icon"></i>
+
+						</div>
+					</div>
+				
+				
+				
+				<div class="two fields">
+
+						<div class="required field">
+							<label>كلمة السر</label>
+							<div class="ui icon input">
+								<input name="pass1" type="password"> <i
+									class="lock icon"></i>
+							</div>
+						</div>
+						<div class="required field">
+							<label>عاود كلمة السر</label>
+							<div class="ui icon input">
+								<input name="pass2" type="password"> <i
+									class="lock icon"></i>
+							</div>
+						</div>
+				</div>
+				
+				
+						
+
+					<div class="ui submit button">Register</div>
+					<span id="status"></span>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+</body>

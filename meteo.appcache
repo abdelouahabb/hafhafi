@@ -1,0 +1,15 @@
+CACHE MANIFEST
+# v = 1.0
+/static/css/meteo.css
+/static/css/semantic.min.css
+/static/js/jquery-2.1.1.min.js
+/static/css/main.css
+/static/js/semantic.min.js
+/static/js/geo.js
+/static/js/meteo.js
+/static/fonts/icons.woff2
+/static/fonts/icons.woff
+/static/fonts/WeatherIcons-Regular.woff
+NETWORK:
+# right now, putting / here is useless, use <iframe> or ajax calls to renew the xsrf...
+FALLBACK:

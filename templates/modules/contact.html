@@ -1,0 +1,26 @@
+<div class="ui first coupled modal">
+    <i class="close icon"></i>
+    <div class="header">
+      ڤول لي كاش حاجة
+    </div>
+    
+    <div class="content">
+    
+      <form id="feedb" class="ui form"  method="post" action="/msg">
+      	{% raw xsrf_form_html() %}
+        <h4 class="ui dividing header">واش رايك في السيت ؟</h4>
+        <div class="required field">
+          <label><i class="write icon"></i></label>
+	          <textarea name="msg" placeholder="عبر عن شعورك يا مواطن"></textarea>
+	          <div class="ui green button" id="fdbk" >دز الحية ;)</div>
+      </form>
+   
+   </div>
+</div>
+
+  
+  
+  <div class="ui small second coupled modal">
+
+  </div>
+  

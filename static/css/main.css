@@ -1,0 +1,31 @@
+i{font-style:normal}
+.content{direction:rtl}
+.main.container{width: 1200px;margin: 0 auto;background-color: rgb(255,255,255);border-radius: 5px;font-family:iconvault} /* use this trick to center your elements ;) */
+
+path {color: red;transition: all 1s;}
+path:hover {fill: black;stroke: white;}
+.meteo{position: relative;display: inline-block;font-size: 1.4em}
+ui.popup>ui.column{background-color: blue;}
+
+.forecast{ transition: all .6s }
+.forecast:hover {transform: translateY(-5%)}
+
+.astr.ui.three.wide.column{transition: all .5s}
+.astr.ui.three.wide.column:hover{transform:translateY(5%)}
+
+.astro.inverted.segment{-webkit-animation: sky 20s infinite; animation: sky 20s infinite}
+@-webkit-keyframes sky {
+    0%   {background-color: rgb(5, 48, 84)}
+    33%  {background-color: rgb(127, 193, 248)}
+    66%  {background-color: rgb(127, 193, 248)}
+    80%  {background-color: rgb(237, 155, 106)}
+    100%  {background-color: rgb(5, 48, 84)} 
+    };
+
+@keyframes sky {
+    0%   {background-color: rgb(5, 48, 84)}
+    33%  {background-color: rgb(127, 193, 248)}
+    66%  {background-color: rgb(127, 193, 248)}
+    80%  {background-color: rgb(237, 155, 106)}
+    100%  {background-color: rgb(5, 48, 84)}
+}

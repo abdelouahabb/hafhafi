@@ -1,0 +1,124 @@
+@font-face {
+	  font-family: "weather";
+	  src: url("../fonts/WeatherIcons-Regular.woff"); /* http://erikflowers.github.io/weather-icons/ */
+	  font-weight: normal;
+	  font-style: normal;
+	}
+
+/** sunraise logo **/
+.astro::after{content:'\f046'; font-size: 1.5em;color: yellow; font-family: weather;position: absolute;font-style:normal;left: 5%;top: 1%;}
+
+/** sunraise **/
+.sunraise::before{content:'\f051'; font-size: 1em;color: #fbac13; font-family: weather;font-style:normal}
+
+/** sunset **/
+.sunset::before{content:'\f052'; font-size: 1em;color: #fb5113; font-family: weather;font-style:normal}
+
+/** moon **/
+.moon::before{content:'\f02e'; font-size: 4em;color: cadetblue; font-family: weather;font-style:normal;position:absolute;top: -10%;left: 45%;-webkit-animation: moon 5s linear alternate infinite;animation: moon 5s linear alternate infinite;}
+.moonn::before{content:'\f02e'; font-size:5em;color: white; font-family: weather;font-style:normal;; top: -5%;right: 10%;-webkit-animation: moon 5s linear alternate infinite;animation: moon 5s linear alternate infinite;}
+
+/** sun **/
+.sun::before{content:'\f00d'; font-size: 4em;color: #fbac13; font-family: weather;font-style:normal;position:absolute;top: -5%;left: 32%;-webkit-animation: rotation 5s linear infinite;animation: rotation 5s linear infinite}
+
+/** cloud **/
+.cloud::after{content:'\f041'; position: relative;z-index: 1;font-size: 5em; ; font-family: weather;font-style: normal;color: white;-webkit-animation: move 2s linear alternate infinite;animation: move 2s linear alternate}
+
+/** dark cloud **/
+.cloudd::after{content:'\f00f'; font-size: 5em; ; font-family: weather;font-style: normal;color: #F0ECEC;position: relative;z-index: 1;}
+
+/** rain **/
+.rain::before{content:'\f05f'; font-size: 4em; ; font-family: weather;font-style: normal;position: absolute;left: 30%;top: 35%;color: rgb(82, 203, 255);animation: rain 1s linear infinite; -webkit-animation: rain 1s linear infinite;}
+
+/** rain more **/
+.rainn::before{content:'\f04e'; font-size:5em; ; font-family: weather;font-style: normal;;color: rgb(82, 203, 255);position: absolute;left: 35%;top: 30%;animation: rainn 1s linear infinite; -webkit-animation: rainn 1s linear infinite;}
+
+/** rain mooooooooore **/
+.rainnn::before{content:'\f04f'; font-size:5em; ; font-family: weather;font-style: normal;;position: absolute;left: -2%;bottom: 0%;color: rgb(82, 203, 255);-webkit-animation: rainnn .6s linear infinite;animation: rainnn .6s linear infinite;}
+
+
+/** wind **/
+.wind::before{content:'\f050'; font-size:5em;color: #c3bcae; font-family: weather;font-style:normal;;-webkit-animation: wind .5s linear infinite alternate;animation: wind .5s linear infinite alternate}
+
+/** thunder **/
+.thunder::after{content:'\f07f'; font-size: 3em; ; font-family: weather;font-style: normal;;opacity: 0.8;position: absolute;left: 20%;top: 30%;transform: rotate(15deg);color: yellow;-webkit-animation: thunder .7s  infinite;animation: thunder .7s ;}
+
+/** fog **/
+.fog::after{content:'\f063'; font-size:5em; ; font-family: weather;font-style: normal;;color: rgb(128, 128, 128);animation: fog 2s linear alternate infinite; -webkit-animation: fog 2s linear alternate infinite;}
+
+/** sleet **/
+.vrour::before{content: '\f049'; font-size:5em; ; font-family: weather;font-style: normal;;position: absolute;left: 29%;top: 35%;transform: rotate(-15deg);color: rgb(255, 255, 255);animation: rain .6s linear infinite; -webkit-animation: rain .6s linear infinite;}
+
+/** snow **/
+.snow::before{content:'\f020'; font-size:5em; ; font-family: weather;font-style: normal;;position: absolute;left: -10%;top: 20%;z-index: 1;transform: rotate(-15deg);color: snow;animation: snow 2s linear infinite; -webkit-animation: snow 2s linear infinite;}
+
+/** snoooooow **/
+
+.snoww::before{content:'\f01f'; font-size:5em; ; font-family: weather;font-style: normal;;position: absolute;left: 8%;top: 25%;transform: rotate(-15deg);color: snow;animation: snow 2s linear infinite; -webkit-animation: snow 2s linear infinite;}
+
+/** snowy rain **/
+.rainsnow::before{content:'\f03f'; font-size:5em; ; font-family: weather;font-style: normal;;position: absolute;left: 27%;top: 34%;z-index: 1;color: rgb(166, 221, 255);animation: rainn 1s linear infinite; -webkit-animation: rainn 1s linear infinite;}
+
+/** snow dust **/
+.dust::before{content:'\f06f'; font-size:5em;color: #FCFAF5; font-family: weather;position: absolute;left: 15%;top: 13%;font-style:normal;}
+.dust::after{content:'\f01f'; font-size:5em; ; font-family: weather;font-style: normal;;position: absolute;left: 8%;top: 25%; color: snow;animation: bliz 1s linear infinite; -webkit-animation: bliz 1s linear infinite;}
+
+/** 113 sun **/
+.sunn::before{content:'\f00d'; font-size:5em;color: #fbac13; font-family: weather;font-style:normal; top: -5%;right: 10%;-webkit-animation: rotation 5s linear infinite;animation: rotation 5s linear infinite}
+
+/** thermo **/
+.thermo::after{content:'\f055'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal;position: absolute;left: 105px;bottom: 20%;}
+.meteo{position: relative;display: inline-block;}
+.actuelle{position: relative;display: inline-block;font-size: 1em;}
+.meteopop{position: relative;display: inline-block;font-size: 0.4em;margin-left: -20%}
+
+.umbrel::after{content:'\f084'; font-size:1em;color: #fbac13; font-family: weather;font-style:normal}
+
+.windd::before{content:'\f050'; font-size:1em;color: #fbac13; font-family: weather;font-style:normal}
+.shab::before{content:'\f013'; font-size:1em;color: #fbac13; font-family: weather;font-style:normal}
+
+.E::after{content:'\f059'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.NNE::after{content:'\f05A'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.ENE::after{content:'\f05A'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.NE::after{content:'\f05A'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.NW::after{content:'\f05B'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.WNW::after{content:'\f05B'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.NNW::after{content:'\f05B'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.N::after{content:'\f05C'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.SE::after{content:'\f05D'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.ESE::after{content:'\f05D'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.SSE::after{content:'\f05D'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.SW::after{content:'\f05E'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.SSW::after{content:'\f05E'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.WSW::after{content:'\f05E'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.S::after{content:'\f060'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.W::after{content:'\f061'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+
+
+
+/** animation **/
+@-webkit-keyframes rotation {from {transform: rotate(0deg);}to {transform: rotate(90deg);}}
+@-webkit-keyframes moon {from {transform: rotate(0deg);}to {transform: rotate(30deg);}}
+@-webkit-keyframes move {from {transform: translate(-10px) ;}to {transform: translate(0px) }}
+@-webkit-keyframes rain {from {transform: translateY(0px)}to {transform: translateY(10px)}}
+@-webkit-keyframes rainn {from {transform: translateY(0px)}to {transform: translateY(10px)}}
+@-webkit-keyframes rainnn {from {transform: translateY(0px)} to {transform: translateY(10px)}}
+@-webkit-keyframes thunder {from {transform: scaleY(1)} to {transform: scaleY(1.5)}}
+@-webkit-keyframes fog {from {transform: translateX(0px)} to {transform: translateX(10px)}}
+@-webkit-keyframes snow {from {transform: translateX(5px) translateY(0px)} to {transform: translateX(0px) translateY(15px)}}
+@-webkit-keyframes bliz {from {transform: translate(-20px, -50px)} to {transform: translateX(0px) translateY(15px)}}
+@-webkit-keyframes wind {from {transform: translateX(0px)} to {transform: translateX(30px) }}
+@-webkit-keyframes dust {from {transform: translateX(0px)} to {transform: translateX(20px) translateY(20px)}}
+
+@keyframes rotation {from {transform: rotate(0deg);}to {transform: rotate(90deg);}}
+@keyframes moon {from {transform: rotate(0deg);}to {transform: rotate(30deg);}}
+@keyframes move {from {transform: translate(-10px) ;}to {transform: translate(0px) }}
+@keyframes rain {from {transform: translateY(0px)}to {transform: translateY(10px)}}
+@keyframes rainn {from {transform: translateY(0px)}to {transform: translateY(10px)}}
+@keyframes rainnn {from {transform: translateY(0px)} to {transform: translateY(10px)}}
+@keyframes thunder {from {transform: scaleY(1)} to {transform: scaleY(1.5)}}
+@keyframes fog {from {transform: translateX(0px)} to {transform: translateX(10px)}}
+@keyframes snow {from {transform: translateX(5px) translateY(0px)} to {transform: translateX(0px) translateY(15px)}}
+@keyframes bliz {from {transform: translate(-20px, -50px)} to {transform: translateX(0px) translateY(15px)}}
+@keyframes wind {from {transform: translateX(0px)} to {transform: translateX(30px) }}
+@keyframes dust {from {transform: translateX(0px)} to {transform: translateX(20px) translateY(20px)}}
