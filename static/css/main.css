@@ -12,20 +12,3 @@ ui.popup>ui.column{background-color: blue;}
 
 .astr.ui.three.wide.column{transition: all .5s}
 .astr.ui.three.wide.column:hover{transform:translateY(5%)}
-
-.astro.inverted.segment{-webkit-animation: sky 20s infinite; animation: sky 20s infinite}
-@-webkit-keyframes sky {
-    0%   {background-color: rgb(5, 48, 84)}
-    33%  {background-color: rgb(127, 193, 248)}
-    66%  {background-color: rgb(127, 193, 248)}
-    80%  {background-color: rgb(237, 155, 106)}
-    100%  {background-color: rgb(5, 48, 84)} 
-    };
-
-@keyframes sky {
-    0%   {background-color: rgb(5, 48, 84)}
-    33%  {background-color: rgb(127, 193, 248)}
-    66%  {background-color: rgb(127, 193, 248)}
-    80%  {background-color: rgb(237, 155, 106)}
-    100%  {background-color: rgb(5, 48, 84)}
-}

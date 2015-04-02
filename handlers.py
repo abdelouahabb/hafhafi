@@ -27,7 +27,7 @@ class MainHandler(tornado.web.RequestHandler):
             self.remote_ip = self.request.remote_ip if not x_real_ip else x_real_ip
             self.jour = (datetime.datetime.utcnow()+ datetime.timedelta(hours=1)).weekday()
             self.today = (datetime.datetime.utcnow()+ datetime.timedelta(hours=1)).today()
-            self.key = "your key"
+            self.key = "got get your key"
             self.heure = (datetime.datetime.utcnow()+ datetime.timedelta(hours=1)).hour
             
 
@@ -48,26 +48,21 @@ class IndexHandler(MainHandler):
                     if self.name == "Firefox":
                         fox = "fox"
                     http_client = AsyncHTTPClient()
-                    response = yield http_client.fetch("http://ip-api.com/json/105.107.100.16") # use this when you test at home to test (must have internet)
-                    #response = yield http_client.fetch("http://ip-api.com/json/{0}".format(self.remote_ip)) # use this when you deploy
+                    response = yield http_client.fetch("http://ip-api.com/json/{0}".format(self.remote_ip)) # use this when you deploy
                     res = json_decode(response.body)
                     info = [res["countryCode"], res["country"], res["isp"]]
                     yield self.db.visit.update({"_id":self.remote_ip},
-                                       {"$inc":{"num":1},
+                                       {
                                         "$set":{"info":info},
-                                        "$inc":{"ban":0},
-                                        "$addToSet":{"brow":[self.name, self.version]}},
+                                        "$addToSet":{"brow":[self.name, self.version]},
+                                        "$inc":{"num":1, "ban":0}},
                                         upsert=True)
-                    yield self.db.visit.update({"_id":self.remote_ip},
-                                       {"$inc":{"num":1},
-                                        "$inc":{"ban":0},
-                                        "$addToSet":{"brow":[self.name, self.version]}},
-                                        upsert=True)
+                    
                     exist = yield self.db.users.find_one({"_id":"vil"})
-                    if (exist and len(exist["rq"]) > 10 and self.now < (exist["tm"] + datetime.timedelta(hours=5))):
+                    if (exist and self.now < (exist["tm"] + datetime.timedelta(hours=5))):
                         req = exist["rq"]
                         self.render("index.html",
-                                    res=json_decode(req)["data"]["weather"],
+                                    res=req["data"]["weather"],
                                     days=days,
                                     jour=self.jour,
                                     heure=self.heure,
@@ -79,11 +74,13 @@ class IndexHandler(MainHandler):
                                     showlocaltime="yes",
                                     cc="no",
                                     tp=6,
-                                    extra="isDayTime")
+                                    extra="isDayTime",
+                                    includelocation="yes")
                         yield tornado.gen.Task(ioloop.IOLoop.instance().add_timeout, time.time() + 2)
+                        h = json_encode(wwo.result)
                         yield self.db.users.update({"_id":"vil"},
                                                    {"$set":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),
-                                                            "rq":json_encode(wwo.result)}},
+                                                            "rq":json_decode(h)}},
                                                     upsert=True)
                         self.render("index.html",
                                     res=wwo.result["data"]["weather"],
@@ -152,11 +149,13 @@ class LatLon(MainHandler):
                             showlocaltime="yes",
                             cc="no",
                             tp=6,
-                            extra="isDayTime")
+                            extra="isDayTime",
+                            includelocation="yes")
                 yield tornado.gen.Task(ioloop.IOLoop.instance().add_timeout, time.time() + 2)
+                h = json_encode(wwo.result)
                 yield self.db.users.update({"_id":self.remote_ip},
                                            {"$set":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),
-                                                    "rq":json_encode(wwo.result)}},
+                                                    "rq":json_decode(h)}},
                                             upsert=True)
                 self.set_cookie("_thd", str(uuid4())) # this is to handle different browsers in the same ip
                 self.write(json_encode(wwo.result))
@@ -169,11 +168,13 @@ class LatLon(MainHandler):
                         showlocaltime="yes",
                         cc="no",
                         tp=6,
-                        extra="isDayTime")
+                        extra="isDayTime",
+                        includelocation="yes")
             yield tornado.gen.Task(ioloop.IOLoop.instance().add_timeout, time.time() + 2)
+            h = json_encode(wwo.result)
             yield self.db.users.update({"_id":self.remote_ip},
                                        {"$set":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),
-                                                "rq":json_encode(wwo.result)}},
+                                                "rq":json_decode(h)}},
                                         upsert=True)
             self.set_cookie("_thd", str(uuid4())) # this is to handle different browsers in the same ip
             self.write(json_encode(wwo.result))
@@ -193,9 +194,10 @@ class Message(MainHandler):
             resp = '''
             <div class="header">
             <i class="red heart icon"></i></div><div class="content"><div class="description"><h1>صحيــــت</h1></div></div>'''
+            info = (yield self.db.visit.find_one({"_id":self.remote_ip}))["info"]
             yield self.db.message.update({"_id":self.remote_ip},
-                                   {"$push":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),
-                                            "msg":msg}},
+                                    {"$push":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),"msg":msg},
+                                    "$set":{"info": info}},
                                     upsert=True)
         else:
             if (yield self.db.visit.find_one({"_id":self.remote_ip}))["ban"] < 5:
@@ -239,7 +241,7 @@ class Register(MainHandler):
         yield self.db.admin.insert({"_id":id,
                               "pwd":ps
                               })
-        self.redirect("/admin")
+        self.redirect("/admination")
 
 
 class Login(MainHandler):
@@ -250,12 +252,19 @@ class Login(MainHandler):
         dbpwd = (yield self.db.admin.find_one({"_id":id}))["pwd"] # trust the admin, no need to verify!
         print dbpwd
         if pbkdf2_sha512.verify(pwd, dbpwd) == True:
-            self.set_secure_cookie("admin", id)
+	    self.set_secure_cookie("admin", id)
             self.redirect("/comments")
         else:
             self.write("baaaaad!")
         
-
+        
+class Comments(MainHandler):
+    @tornado.gen.coroutine
+    def get(self):
+        cursor = self.db.message.find()
+        comments = yield cursor.to_list(length=None)
+        self.render("comments.html", comments = comments)
+       
 class Auth(tornado.web.RequestHandler):
     def get_current_user(self):
         return self.get_secure_cookie("admin")

@@ -1,4 +1,14 @@
-{% include header.html %}
+<!DOCTYPE html>
+
+<html>
+  <head>
+  	<meta charset="UTF-8">
+  	<title>adminossss</title>
+  	<link rel="stylesheet" href="static/css/semantic.min.css" />
+ </head>
+ 
+<body>
+
 <br />
 
 <div class="ui centered grid">
@@ -14,7 +24,7 @@
 							<i class="orange small user icon"></i>
 						</div>
 						<div class="content">
-							<a class="header"><p class="metadata">{{comment["_id"]}}</p></a>
+							<a class="header"><i class="{{comment["info"][0].lower()}} flag"></i> <p class="metadata">{{comment["_id"]}}</p> {{comment["info"][2].lower()}}</a>
 						</div>
 					</div>
 
@@ -40,3 +50,4 @@
 	{% end %}
 
 </div>
+</body>

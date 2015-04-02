@@ -4,11 +4,13 @@ function Dessiner(){
 	var days = ["الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"]
 	jour = parseInt($("#day").val());
 	$.each(loops, function(index, val) {  
-		$('#dessin').append('<div class="column"><div class="ui center aligned inverted segment"><div class="ui animated fade blue button" onclick="Dailer.call(this)" id='+index+'><div class="visible content d'+index+'">'+days[(jour+index)%7]+'</div><div class="hidden content ">طقس السمانة</div></div></div></div>');
+		$('#dessin').append('<div class="column"><div class="ui center aligned inverted segment"><div class="ui animated fade blue massive button" onclick="Dailer.call(this)" id='+index+'><div class="visible content d'+index+'">'+days[(jour+index)%7]+'</div><div class="hidden content ">طقس السمانة</div></div></div></div>');
 		  });
 	$(".d0").prepend(" اليوم ");
 	$(".d1").prepend(" غدوة ");
 	$(".d2").prepend(" غير غدوة ");	
+	$(".d3").prepend(" يوم ");
+	$(".d4").prepend(" يوم ");
 }
 // this is the client side weather icon rendering, since you only use css, no overhead, welcome to the web of 2015 !
 function climat(code, isday, h){
@@ -100,7 +102,9 @@ function Meteo(d) {
 			'<i class="blue travel icon"></i> 4 أيام عندكم' ]
 	var meteo = JSON.parse(localStorage.getItem('meteo')).data;
 	
-	$("#bled").html(days[d])
+	$("#bled").html(days[d]);
+	
+	$("#lguit").html('<div class="ui blue icon message"><i class="find icon"></i><div class="content"><div class="header">على حساب الشوفة راك ڤريب من ولاية   ' + meteo.nearest_area[0].region[0].value + '</div></div></div>');
 	
 	// from AM PM to normal time, note that you can use momentjs library, but since we know that sunset is always pm,
 	// that means that we just add 12, to use momentjs: var sunset = moment("07:02 PM", ["h:mm A"]); alert(sunset.format("HH:mm"));

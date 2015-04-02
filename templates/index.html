@@ -2,7 +2,7 @@
 
 <div class="ui right aligned grid">
 	<div class="ui three wide column">
-	<div class="ui center aligned inverted orange segment">	
+	<div class="ui center aligned inverted orange segment">
 		<div id="me" class="ui animated fade large inverted button">
 		  <div class="visible content">ڤول لي حاجة</div>
 		  <div class="hidden content">عبر عن شعورك</div>
@@ -17,19 +17,21 @@
 {% if fox == "fox" %}
 
 <div class="ui red icon message"><i class="close icon"></i> <i class="bug icon"></i><div class="content"><div class="header">السيت ما يمشيش مليح على فايرفوكس جيب كروم ولا أوبرا
-<a href="https://support.google.com/installer/answer/126299?hl=en" target="_blank"> كليكي هنا لكروم </a> 
+<a href="https://support.google.com/installer/answer/126299?hl=en" target="_blank"> كليكي هنا لكروم </a>
 و لا <a href="http://www.opera.com/fr/computer/thanks?partner=www&par=id%3D38198%26amp;location%3D395&gaprod=opera" target="_blank"> هنا لأوبرا </a></div><p>ضرك لانيماصيو ما تمشيش <i class="configure icon"></i></p></div></div>
 
 {% end %}
 
 <h1 class="ui horizontal header divider" id="bled">
-    <i class="blue travel icon"></i> 
-اليوم في سطيـــف (هاذي ماشي معناه راك في سطيف، لازم تكليكي على جيب وين راني باش نجيبلك وين راك) 
+    <i class="blue travel icon"></i>
+اليوم في سطيـــف (هاذي ماشي معناه راك في سطيف، لازم تكليكي على جيب وين راني باش نجيبلك وين راك)
  </h1>
 
-{% module Geo() %}
-  
+<div id="lguit"></div>
+
 {% module Astro(res) %}
+
+{% module Geo() %}
 
 {% module Detail(res) %}
 
