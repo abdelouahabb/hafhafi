@@ -13,6 +13,7 @@ from uuid import uuid4
 from passlib.hash import pbkdf2_sha512 # if you want more security, use bcrypt or download scrypt module.
 
 days = ["الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"]
+db = motor.MotorClient().meteo
 
 class MainHandler(tornado.web.RequestHandler):
     def initialize(self):
@@ -22,7 +23,6 @@ class MainHandler(tornado.web.RequestHandler):
         self.version = user_agents.parse(a).browser.version[0]
         if self.name in ["Chrome", "Firefox", "Opera", "Chrome Mobile", "Firefox Mobile", "Opera Mobile"] and self.version > 25:
             x_real_ip = self.request.headers.get("x-forwarded-for")
-            self.db = motor.MotorClient().meteo
             self.now = datetime.datetime.utcnow() + datetime.timedelta(hours=1)
             self.remote_ip = self.request.remote_ip if not x_real_ip else x_real_ip
             self.jour = (datetime.datetime.utcnow()+ datetime.timedelta(hours=1)).weekday()
@@ -41,7 +41,7 @@ class IndexHandler(MainHandler):
                 self.write("<h1>روح تيليشارجي كروم ولا أوبرا ولا فايرفوكس و رواح</h1>")
         else:
             if self.version > 25:
-                if (yield self.db.visit.find_one({"_id":self.remote_ip})) and (yield self.db.visit.find_one({"_id":self.remote_ip}))["ban"] > 4:
+                if (yield db.visit.find_one({"_id":self.remote_ip})) and (yield db.visit.find_one({"_id":self.remote_ip}))["ban"] > 4:
                     self.redirect("/bsod")
                 else:
                     fox = ""
@@ -51,14 +51,14 @@ class IndexHandler(MainHandler):
                     response = yield http_client.fetch("http://ip-api.com/json/{0}".format(self.remote_ip)) # use this when you deploy
                     res = json_decode(response.body)
                     info = [res["countryCode"], res["country"], res["isp"]]
-                    yield self.db.visit.update({"_id":self.remote_ip},
+                    yield db.visit.update({"_id":self.remote_ip},
                                        {
                                         "$set":{"info":info},
                                         "$addToSet":{"brow":[self.name, self.version]},
                                         "$inc":{"num":1, "ban":0}},
                                         upsert=True)
                     
-                    exist = yield self.db.users.find_one({"_id":"vil"})
+                    exist = yield db.users.find_one({"_id":"vil"})
                     if (exist and self.now < (exist["tm"] + datetime.timedelta(hours=5))):
                         req = exist["rq"]
                         self.render("index.html",
@@ -78,7 +78,7 @@ class IndexHandler(MainHandler):
                                     includelocation="yes")
                         yield tornado.gen.Task(ioloop.IOLoop.instance().add_timeout, time.time() + 2)
                         h = json_encode(wwo.result)
-                        yield self.db.users.update({"_id":"vil"},
+                        yield db.users.update({"_id":"vil"},
                                                    {"$set":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),
                                                             "rq":json_decode(h)}},
                                                     upsert=True)
@@ -124,7 +124,7 @@ class Geo(tornado.web.UIModule):
 class LatLon(MainHandler):
     @tornado.gen.coroutine
     def post(self):
-        exist = yield self.db.users.find_one({"_id":self.remote_ip})
+        exist = yield db.users.find_one({"_id":self.remote_ip})
         e = self.get_cookie("_thd")
         if exist:
             if (e != None and self.now < (exist["tm"] + datetime.timedelta(hours=5))):
@@ -136,7 +136,7 @@ class LatLon(MainHandler):
                 <div class="ui green ok basic inverted massive button"><i class="thumbs outline up icon"></i>  نستنى </div></div></div></div>'''.format(w)
                 self.write(a)
             elif (e == None and len(exist["rq"]) > 10 and self.now < (exist["tm"] + datetime.timedelta(hours=5))):
-                req = (yield self.db.users.find_one({"_id":self.remote_ip}))["rq"]
+                req = (yield db.users.find_one({"_id":self.remote_ip}))["rq"]
                 a = json_decode(req)
                 self.set_cookie("_thd", str(uuid4())) # this is to handle different browsers in the same ip
                 self.write(json_encode(a))
@@ -153,7 +153,7 @@ class LatLon(MainHandler):
                             includelocation="yes")
                 yield tornado.gen.Task(ioloop.IOLoop.instance().add_timeout, time.time() + 2)
                 h = json_encode(wwo.result)
-                yield self.db.users.update({"_id":self.remote_ip},
+                yield db.users.update({"_id":self.remote_ip},
                                            {"$set":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),
                                                     "rq":json_decode(h)}},
                                             upsert=True)
@@ -172,7 +172,7 @@ class LatLon(MainHandler):
                         includelocation="yes")
             yield tornado.gen.Task(ioloop.IOLoop.instance().add_timeout, time.time() + 2)
             h = json_encode(wwo.result)
-            yield self.db.users.update({"_id":self.remote_ip},
+            yield db.users.update({"_id":self.remote_ip},
                                        {"$set":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),
                                                 "rq":json_decode(h)}},
                                         upsert=True)
@@ -194,14 +194,14 @@ class Message(MainHandler):
             resp = '''
             <div class="header">
             <i class="red heart icon"></i></div><div class="content"><div class="description"><h1>صحيــــت</h1></div></div>'''
-            info = (yield self.db.visit.find_one({"_id":self.remote_ip}))["info"]
-            yield self.db.message.update({"_id":self.remote_ip},
+            info = (yield db.visit.find_one({"_id":self.remote_ip}))["info"]
+            yield db.message.update({"_id":self.remote_ip},
                                     {"$push":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),"msg":msg},
                                     "$set":{"info": info}},
                                     upsert=True)
         else:
-            if (yield self.db.visit.find_one({"_id":self.remote_ip}))["ban"] < 5:
-                yield self.db.visit.update({"_id":self.remote_ip},
+            if (yield db.visit.find_one({"_id":self.remote_ip}))["ban"] < 5:
+                yield db.visit.update({"_id":self.remote_ip},
                                            {"$inc":{"ban":1}})
                 resp = '''
                 <div class="header">
@@ -216,7 +216,7 @@ class Message(MainHandler):
 class Admin(MainHandler):
     @tornado.gen.coroutine
     def get(self):
-        admin = yield self.db.admin.find().count()
+        admin = yield db.admin.find().count()
         if admin == 0:
             self.render("register.html")
         elif admin == 1:
@@ -238,7 +238,7 @@ class Register(MainHandler):
         id = self.get_argument("email")
         pwd = self.get_argument("pass1") # trust the admin, no need for server-side validation
         ps = pbkdf2_sha512.encrypt(pwd, salt_size = 32, rounds = 1000) # put some big rounds here!
-        yield self.db.admin.insert({"_id":id,
+        yield db.admin.insert({"_id":id,
                               "pwd":ps
                               })
         self.redirect("/admination")
@@ -249,7 +249,7 @@ class Login(MainHandler):
     def post(self):
         id = self.get_argument("email")
         pwd = self.get_argument("pass1") # trust the admin, no need for server-side validation
-        dbpwd = (yield self.db.admin.find_one({"_id":id}))["pwd"] # trust the admin, no need to verify!
+        dbpwd = (yield db.admin.find_one({"_id":id}))["pwd"] # trust the admin, no need to verify!
         print dbpwd
         if pbkdf2_sha512.verify(pwd, dbpwd) == True:
 	    self.set_secure_cookie("admin", id)
@@ -261,7 +261,7 @@ class Login(MainHandler):
 class Comments(MainHandler):
     @tornado.gen.coroutine
     def get(self):
-        cursor = self.db.message.find()
+        cursor = db.message.find()
         comments = yield cursor.to_list(length=None)
         self.render("comments.html", comments = comments)
        
@@ -274,7 +274,7 @@ class Comments(MainHandler, Auth):
     @tornado.web.authenticated
     @tornado.gen.coroutine
     def get(self):
-        cursor = self.db.message.find()
+        cursor = db.message.find()
         comments = yield cursor.to_list(length=None)
         self.render("comments.html", comments = comments)
         
