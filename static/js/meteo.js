@@ -104,14 +104,14 @@ function Meteo(d) {
 	
 	$("#bled").html(days[d]);
 	
-	$("#lguit").html('<div class="ui blue icon message"><i class="find icon"></i><div class="content"><div class="header">على حساب الشوفة راك ڤريب من ولاية   ' + meteo.nearest_area[0].region[0].value + '</div></div></div>');
+//	$("#lguit").html('<div class="ui blue icon message"><i class="find icon"></i><div class="content"><div class="header">على حساب الشوفة راك ڤريب من ولاية   ' + meteo.nearest_area[0].region[0].value + '</div></div></div>');
 	
 	// from AM PM to normal time, note that you can use momentjs library, but since we know that sunset is always pm,
 	// that means that we just add 12, to use momentjs: var sunset = moment("07:02 PM", ["h:mm A"]); alert(sunset.format("HH:mm"));
 	for (i = 0; i < 5; i++) {
-		var sunrise = meteo.weather[i].astronomy[0].sunrise.substr(0, 5)
-		var time = meteo.weather[i].astronomy[0].sunset.substr(0, 5)
-		var sunset = parseInt(time.substr(0, 2)) + 12 + ":" + time.substr(3,5)
+		var sunrise = meteo.weather[i].astronomy[0].sunrise.substr(0, 5);
+		var time = meteo.weather[i].astronomy[0].sunset.substr(0, 5);
+		var sunset = parseInt(time.substr(0, 2)) + 12 + ":" + time.substr(3,5);
 		$("#riz"+i).html(sunrise);
 		$("#set"+i).html(sunset);
 	}

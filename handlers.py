@@ -27,7 +27,7 @@ class MainHandler(tornado.web.RequestHandler):
             self.remote_ip = self.request.remote_ip if not x_real_ip else x_real_ip
             self.jour = (datetime.datetime.utcnow()+ datetime.timedelta(hours=1)).weekday()
             self.today = (datetime.datetime.utcnow()+ datetime.timedelta(hours=1)).today()
-            self.key = "got get your key"
+            self.key = "your key"
             self.heure = (datetime.datetime.utcnow()+ datetime.timedelta(hours=1)).hour
             
 

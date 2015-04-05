@@ -32,8 +32,26 @@ $(window).ready(function(){
         function latlon(position){
         	xsrf = $("iframe").contents().find("input").val()
             $("#laat").html('<input id="lat" type="hidden" name="lat"></input><input type="hidden" name="_xsrf" value='+xsrf+'><input id="lon" type="hidden" name="lon"></input><input class="ui fluid massive yellow button" value="جيبلي الأحوال الجوية ضرك" type="submit"/>');
-            $("#lat").val(position.coords.latitude);
+        	$("#lat").val(position.coords.latitude);
             $("#lon").val(position.coords.longitude);
+        	$("#lguit").html('<div id="map" style="height:200px; width:600px"></div>'+
+        			'<script>'+
+        			'var map = L.map( "map", {center:['+
+        			position.coords.latitude+
+        			','+
+        			position.coords.longitude+
+        			'],minZoom: 5,zoom: 10});L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {attribution:"OpenStreetMap"}).addTo(map);'+
+        			'var marker = L.marker(['+
+        			position.coords.latitude+
+        			','+
+        			position.coords.longitude+
+        			']).addTo(map).bindPopup("راك هنا ?").openPopup();'+
+        			'marker.dragging.enable();marker.on("dragend", function(e) {'+
+        			'var coords = e.target.getLatLng();var lat = coords.lat;var lng = coords.lng;map.panTo(new L.LatLng(coords.lat, coords.lng));'+
+        			'$("#lat").val(coords.lat);$("#lon").val(coords.lng);console.log(coords.lat)});'+
+        			'</script>');
+        	
+            
         };
         
 
@@ -81,9 +99,11 @@ $(window).ready(function(){
             		$("#alrdy").empty();	
             	}
                 $("#efem").remove();
-                $(".ui.active.dimmer").remove()
+                $("#warn").remove();
+                $(".ui.active.dimmer").remove();
                 Meteo();
                 Dessiner();
+                
                 
                 
             },
