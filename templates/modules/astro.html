@@ -1,3 +1,4 @@
+
 <div class="ui five column stackable doubling grid">
 	{% for i in xrange(5) %}
 	<div class="ui column">
@@ -5,7 +6,7 @@
 			<div class="astro ui inverted blue segment">
 				<div class="ui top attached black label c{{i}}">
 					{{days[(jour+i)%7]}}
-					<div>{{res[i]["date"]}}</div>
+					<div id="dt{{i}}">{{res[i]["date"]}}</div>
 				</div>
 				<div>&nbsp;</div>
 				<div class="ui label sunraise">
@@ -27,4 +28,51 @@
 
 
 	{% end %}
+
+</div>
+
+
+<div id="ramdhan" style="display:none">
+
+<div class="ui centered grid">
+
+<div class="five wide column">
+<div class="ui blue icon message">
+  <i class="mooon icon"></i>
+  <div class="content">
+    <div class="header" id="ram">
+      
+    </div>
+    <p>يدخل هلال رمضان الكريم</p>
+  </div>
+</div>
+</div>
+
+<div class="five wide column">
+<div class="ui blue icon message">
+  <i class="circle thin icon"></i>
+  <div class="content">
+    <div class="header" id="nisf">
+      
+    </div>
+    <p>النصفية</p>
+  </div>
+</div>
+</div>
+
+<div class="five wide column">
+<div class="ui blue icon message">
+  <i class="mooon icon"></i>
+  <div class="content">
+    <div class="header" id="aid">
+      
+    </div>
+    <p>يدخل هلال شوال</p>
+  </div>
+</div>
+
+</div>
+
+</div>
+
 </div>

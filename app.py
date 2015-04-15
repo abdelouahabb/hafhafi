@@ -6,16 +6,15 @@ from tornado.options import define, options
 import handlers, os
 
 
-ip   = os.environ['OPENSHIFT_PYTHON_IP']
-port = int(os.environ['OPENSHIFT_PYTHON_PORT'])
-#define("port",default=8080,type=int)
-#define("address",default="192.168.1.4") 
+#ip   = os.environ['OPENSHIFT_PYTHON_IP']
+#port = int(os.environ['OPENSHIFT_PYTHON_PORT'])
+define("port",default=8000,type=int)
+define("address",default="localhost") 
 # if you want to test on your machine, avoid localhost, use your wifi address,
 # so you can test easily offline app, by stopping the server.
 
 urls = [
     (r"/", handlers.IndexHandler),
-    (r"/hack", handlers.Hack),
     (r"/latlon", handlers.LatLon),
     (r"/msg", handlers.Message),
     (r"/admination", handlers.Admin), # please avoid making admin pages named admin ...
@@ -51,6 +50,6 @@ application = tornado.web.Application(urls,**settings)
 if __name__ == "__main__":
     options.parse_command_line()
     server = tornado.httpserver.HTTPServer(application)
-    #server.listen(options.port, options.address) # uncomment this if you use your wifi address so you can test better
-    server.listen(port, ip)
+    server.listen(options.port, options.address) # uncomment this if you use your wifi address so you can test better
+    #server.listen(port, ip)
     tornado.ioloop.IOLoop.instance().start()

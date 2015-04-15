@@ -7,12 +7,17 @@ from tornado.httpclient import AsyncHTTPClient
 import user_agents
 from tornadwwo import wwo
 import time
+import os
+from math import radians
+import ephem
 import datetime
+import pytz
 import motor
 from uuid import uuid4
 from passlib.hash import pbkdf2_sha512 # if you want more security, use bcrypt or download scrypt module.
 
 days = ["الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"]
+http_client = AsyncHTTPClient()
 db = motor.MotorClient().meteo
 
 class MainHandler(tornado.web.RequestHandler):
@@ -23,12 +28,12 @@ class MainHandler(tornado.web.RequestHandler):
         self.version = user_agents.parse(a).browser.version[0]
         if self.name in ["Chrome", "Firefox", "Opera", "Chrome Mobile", "Firefox Mobile", "Opera Mobile"] and self.version > 25:
             x_real_ip = self.request.headers.get("x-forwarded-for")
-            self.now = datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+            self.now = datetime.datetime.now(pytz.timezone("Africa/Algiers"))
             self.remote_ip = self.request.remote_ip if not x_real_ip else x_real_ip
-            self.jour = (datetime.datetime.utcnow()+ datetime.timedelta(hours=1)).weekday()
-            self.today = (datetime.datetime.utcnow()+ datetime.timedelta(hours=1)).today()
-            self.key = "your key"
-            self.heure = (datetime.datetime.utcnow()+ datetime.timedelta(hours=1)).hour
+            self.jour = datetime.datetime.now(pytz.timezone("Africa/Algiers")).weekday()
+            self.today = datetime.datetime.now(pytz.timezone("Africa/Algiers")).today()
+            self.key = "get your key"
+            self.heure = datetime.datetime.now(pytz.timezone("Africa/Algiers")).hour
             
 
 class IndexHandler(MainHandler):
@@ -47,25 +52,27 @@ class IndexHandler(MainHandler):
                     fox = ""
                     if self.name == "Firefox":
                         fox = "fox"
-                    http_client = AsyncHTTPClient()
-                    response = yield http_client.fetch("http://ip-api.com/json/{0}".format(self.remote_ip)) # use this when you deploy
+                    response = yield http_client.fetch("http://ip-api.com/json/105.107.2.250") # use this when you deploy
+                    #response = yield http_client.fetch("http://ip-api.com/json/{0}".format(self.remote_ip)) # use this when you deploy
                     res = json_decode(response.body)
                     info = [res["countryCode"], res["country"], res["isp"]]
                     yield db.visit.update({"_id":self.remote_ip},
                                        {
                                         "$set":{"info":info},
+                                        "$push":{"tm":datetime.datetime.now(pytz.timezone("Africa/Algiers"))},
                                         "$addToSet":{"brow":[self.name, self.version]},
                                         "$inc":{"num":1, "ban":0}},
                                         upsert=True)
                     
                     exist = yield db.users.find_one({"_id":"vil"})
-                    if (exist and self.now < (exist["tm"] + datetime.timedelta(hours=5))):
+                    if (exist and self.now < (pytz.timezone("Africa/Algiers").localize(exist["tm"]) + datetime.timedelta(hours=5))):
                         req = exist["rq"]
                         self.render("index.html",
                                     res=req["data"]["weather"],
                                     days=days,
                                     jour=self.jour,
                                     heure=self.heure,
+                                    now=self.now,
                                     fox=fox)
                     else:
                         wwo.request(key=self.key,
@@ -79,7 +86,7 @@ class IndexHandler(MainHandler):
                         yield tornado.gen.Task(ioloop.IOLoop.instance().add_timeout, time.time() + 2)
                         h = json_encode(wwo.result)
                         yield db.users.update({"_id":"vil"},
-                                                   {"$set":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),
+                                                   {"$set":{"tm":datetime.datetime.now(pytz.timezone("Africa/Algiers")),
                                                             "rq":json_decode(h)}},
                                                     upsert=True)
                         self.render("index.html",
@@ -91,10 +98,6 @@ class IndexHandler(MainHandler):
             else:
                 self.write("<h1>دير ميزاجور بركاك ماراك تعيش في العصر الحجري</h1>")
 
-class Hack(MainHandler):
-    @tornado.gen.coroutine
-    def get(self):
-        self.render("hack.html")
         
 class IE(MainHandler):
     def get(self):
@@ -114,7 +117,7 @@ class JawModule(tornado.web.UIModule):
 
 class AstroModule(tornado.web.UIModule):
     def render(self, res):
-        jour = (datetime.datetime.utcnow()+ datetime.timedelta(hours=1)).weekday()
+        jour = datetime.datetime.now(pytz.timezone("Africa/Algiers")).weekday()
         return self.render_string("modules/astro.html", res=res, days=days, jour=jour)
 
 class Geo(tornado.web.UIModule):
@@ -124,25 +127,36 @@ class Geo(tornado.web.UIModule):
 class LatLon(MainHandler):
     @tornado.gen.coroutine
     def post(self):
+        
         exist = yield db.users.find_one({"_id":self.remote_ip})
         e = self.get_cookie("_thd")
         if exist:
-            if (e != None and self.now < (exist["tm"] + datetime.timedelta(hours=5))):
-                w = str(exist["tm"] + datetime.timedelta(hours=5))[10:16]
+            if (e != None and self.now < (pytz.timezone("Africa/Algiers").localize(exist["tm"]) + datetime.timedelta(hours=5))):
+                w = str(exist["tm"] + datetime.timedelta(hours=5))[11:16]
                 a = '''
                 <div class="ui basic modal" id="back"><div class="header"><i class="announcement icon"></i> أصبر شوي
                 </div><div class="content"><div class="image"><i class="wait icon"></i></div><div class="description">
                 <h1> باش تلڤى الجديد ولي على {}  </h1></div></div><div class="actions"><div class="one fluid ui inverted buttons">
                 <div class="ui green ok basic inverted massive button"><i class="thumbs outline up icon"></i>  نستنى </div></div></div></div>'''.format(w)
                 self.write(a)
-            elif (e == None and len(exist["rq"]) > 10 and self.now < (exist["tm"] + datetime.timedelta(hours=5))):
+            elif (e == None and len(exist["rq"]) > 10 and self.now < (pytz.timezone("Africa/Algiers").localize(exist["tm"]) + datetime.timedelta(hours=5))):
                 req = (yield db.users.find_one({"_id":self.remote_ip}))["rq"]
                 a = json_decode(req)
+                print type(a)
                 self.set_cookie("_thd", str(uuid4())) # this is to handle different browsers in the same ip
                 self.write(json_encode(a))
             else:
                 lat = self.get_argument("lat")
                 lon = self.get_argument("lon")
+                response = yield http_client.fetch("http://api.geonames.org/timezoneJSON?formatted=true&lat={0}&lng={1}&username={2}".format(lat, lon, "example")) # get your id from genonames
+                geo = json_decode(response.body)
+                obs = ephem.Observer()
+                obs.lat = radians(float(lat))
+                obs.lon = radians(float(lon))
+                obs.date = datetime.date(2015, 6, 1)
+                ramd = ephem.next_new_moon(obs.date)
+                nesf = ephem.next_full_moon(ramd)
+                aid = ephem.next_new_moon(nesf)
                 wwo.request(key=self.key,
                             q="{},{}".format(lat, lon),
                             format="json",
@@ -154,14 +168,24 @@ class LatLon(MainHandler):
                 yield tornado.gen.Task(ioloop.IOLoop.instance().add_timeout, time.time() + 2)
                 h = json_encode(wwo.result)
                 yield db.users.update({"_id":self.remote_ip},
-                                           {"$set":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),
+                                           {"$set":{"tm":datetime.datetime.now(pytz.timezone("Africa/Algiers")),
                                                     "rq":json_decode(h)}},
                                             upsert=True)
                 self.set_cookie("_thd", str(uuid4())) # this is to handle different browsers in the same ip
+                wwo.result.update({"now":geo["time"], "ramd":str(ramd), "nesf":str(nesf), "aid":str(aid) })
                 self.write(json_encode(wwo.result))
         else:
             lat = self.get_argument("lat")
             lon = self.get_argument("lon")
+            response = yield http_client.fetch("http://api.geonames.org/timezoneJSON?formatted=true&lat={0}&lng={1}&username={2}".format(lat, lon, "example")) # get your id from genonames
+            geo = json_decode(response.body)
+            obs = ephem.Observer()
+            obs.lat = radians(float(lat))
+            obs.lon = radians(float(lon))
+            obs.date = datetime.date(2015, 6, 1)
+            ramd = ephem.next_new_moon(obs.date)
+            nesf = ephem.next_full_moon(ramd)
+            aid = ephem.next_new_moon(nesf)
             wwo.request(key=self.key,
                         q="{},{}".format(lat, lon),
                         format="json",
@@ -173,10 +197,11 @@ class LatLon(MainHandler):
             yield tornado.gen.Task(ioloop.IOLoop.instance().add_timeout, time.time() + 2)
             h = json_encode(wwo.result)
             yield db.users.update({"_id":self.remote_ip},
-                                       {"$set":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),
+                                       {"$set":{"tm":datetime.datetime.now(pytz.timezone("Africa/Algiers")),
                                                 "rq":json_decode(h)}},
                                         upsert=True)
             self.set_cookie("_thd", str(uuid4())) # this is to handle different browsers in the same ip
+            wwo.result.update({"now":geo["time"], "ramd":str(ramd), "nesf":str(nesf), "aid":str(aid) })
             self.write(json_encode(wwo.result))
             
 
@@ -196,7 +221,7 @@ class Message(MainHandler):
             <i class="red heart icon"></i></div><div class="content"><div class="description"><h1>صحيــــت</h1></div></div>'''
             info = (yield db.visit.find_one({"_id":self.remote_ip}))["info"]
             yield db.message.update({"_id":self.remote_ip},
-                                    {"$push":{"tm":datetime.datetime.utcnow() + datetime.timedelta(hours=1),"msg":msg},
+                                    {"$push":{"tm":datetime.datetime.now(pytz.timezone("Africa/Algiers")),"msg":msg},
                                     "$set":{"info": info}},
                                     upsert=True)
         else:

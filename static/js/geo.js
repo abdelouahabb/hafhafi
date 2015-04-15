@@ -30,7 +30,7 @@ $(window).ready(function(){
         }
                  // store the lat-lon value in a hidden input to send them to the server
         function latlon(position){
-        	xsrf = $("iframe").contents().find("input").val()
+        	xsrf = $("#srf").children().val()
             $("#laat").html('<input id="lat" type="hidden" name="lat"></input><input type="hidden" name="_xsrf" value='+xsrf+'><input id="lon" type="hidden" name="lon"></input><input class="ui fluid massive yellow button" value="جيبلي الأحوال الجوية ضرك" type="submit"/>');
         	$("#lat").val(position.coords.latitude);
             $("#lon").val(position.coords.longitude);
@@ -89,7 +89,7 @@ $(window).ready(function(){
             data: $("#latlon").serialize(),
             contentType: "application/x-www-form-urlencoded",
             success: function(responseData) {
-            	if (responseData.slice(0,5) ==  '{"dat'){
+            	if (responseData.slice(0,5) ==  '{"ram'){
                 localStorage.setItem('meteo', responseData);
             	}
             	else {
@@ -103,8 +103,7 @@ $(window).ready(function(){
                 $(".ui.active.dimmer").remove();
                 Meteo();
                 Dessiner();
-                
-                
+                $("#jeun").show();
                 
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -185,3 +184,11 @@ $(document).ready(function(){
 		  on     : 'blur'
 		  }
 	  )});
+
+function ramadhan(){
+	countdown(ramdhan, "#ram");
+	countdown(nisf, "#nisf");
+	countdown(aid, "#aid");
+    $("#ramdhan").show();
+    $("#jeun").hide();
+}

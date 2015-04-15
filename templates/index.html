@@ -1,5 +1,11 @@
 {% include header.html %}
 
+
+
+<div id="srf">
+{% raw xsrf_form_html() %}
+</div>
+
 <div class="ui right aligned grid">
 	<div class="ui three wide column">
 	<div class="ui center aligned inverted orange segment">	
@@ -14,6 +20,7 @@
 
 <div class="content">
 
+
 {% if fox == "fox" %}
 
 <div class="ui red icon message"><i class="close icon"></i> <i class="bug icon"></i><div class="content"><div class="header">السيت ما يمشيش مليح على فايرفوكس جيب كروم ولا أوبرا
@@ -22,16 +29,21 @@
 
 {% end %}
 
+
+{% module Astro(res) %}
+
+{% module Geo() %}
+
 <h1 class="ui horizontal header divider" id="bled">
     <i class="blue travel icon"></i> 
 اليوم في سطيـــف (هاذي ماشي معناه راك في سطيف، لازم تكليكي على جيب وين راني باش نجيبلك وين راك) 
  </h1>
 
-
-
-{% module Astro(res) %}
-
-{% module Geo() %}
+<div class="ui fluid animated massive blue fade button" id="jeun" style="display:none" onclick="ramadhan();">
+		<div class="visible content"> وكتاش رمضان ؟</div>
+		<div class="hidden content">النتيجة بالحسابات الفلكية</div>
+</div>
+<br/>
 
 {% module Detail(res) %}
 
@@ -40,13 +52,6 @@
 </div>
 
 
-<div class="ui centered grid">
-	<div class="ui fourteen wide column"><div class="ui all stacked blue segment">
-	Powered by <a href="http://www.worldweatheronline.com/" title="Free Weather API" target="_blank">World Weather Online</a>
-<a href="https://developer.worldweatheronline.com/" target="_blank"><img class="ui round image" alt="Weather API" src="http://cdn.worldweatheronline.net/staticv3/images/logo_small.png" style="border-style:solid; border-width:0px; height:43px; width:100px" /></a>
-</div>
-</div>
-</div>
 {% module Contact() %}
 
 </body>

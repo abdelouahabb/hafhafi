@@ -1,7 +1,7 @@
 // i dont want to use external libraries like momentjs, because i will only use less than 5% of their option, so why not make the function ;)
 function Dessiner(){
 	var loops = [0,1,2,3,4];
-	var days = ["الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"]
+	var days = ["الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"];
 	jour = parseInt($("#day").val());
 	$.each(loops, function(index, val) {  
 		$('#dessin').append('<div class="column"><div class="ui center aligned inverted segment"><div class="ui animated fade blue massive button" onclick="Dailer.call(this)" id='+index+'><div class="visible content d'+index+'">'+days[(jour+index)%7]+'</div><div class="hidden content ">طقس السمانة</div></div></div></div>');
@@ -11,6 +11,7 @@ function Dessiner(){
 	$(".d2").prepend(" غير غدوة ");	
 	$(".d3").prepend(" يوم ");
 	$(".d4").prepend(" يوم ");
+	
 }
 // this is the client side weather icon rendering, since you only use css, no overhead, welcome to the web of 2015 !
 function climat(code, isday, h){
@@ -94,13 +95,16 @@ function climat(code, isday, h){
 var d = 0;
 function Meteo(d) {
 	var d = (typeof d != 'undefined' ? d : 0 );
-	
-	var days = [ '<i class="blue travel icon"></i> نهار اليوم عندكم',
-			'<i class="blue travel icon"></i> غدوة عندكم',
-			'<i class="blue travel icon"></i> بعد غدوة عندكم',
-			'<i class="blue travel icon"></i> 3 أيام عندكم',
-			'<i class="blue travel icon"></i> 4 أيام عندكم' ]
+	var month = ["جانفي", "فيفري", "مارس", "أفريل", "ماي", "جوان", "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"]
+	var days = ["الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"];
+	parseInt($("#day").val())
+	var days = [ '<i class="blue travel icon"></i> نهار اليوم عندكم '+ '- ' + days[(parseInt($("#day").val()))%7] + ' ' + $("#dt0").text().slice(8, 10) + ' ' +  month[(parseInt($("#dt0").text().slice(5, 7))-1)%12],
+			'<i class="blue travel icon"></i> غدوة عندكم ' + '- ' + days[(parseInt($("#day").val())+1)%7] + ' ' + $("#dt1").text().slice(8, 10) + ' ' + month[(parseInt($("#dt0").text().slice(5, 7))-1)%12],
+			'<i class="blue travel icon"></i> بعد غدوة عندكم ' + '- ' + days[(parseInt($("#day").val())+2)%7] + ' ' + $("#dt2").text().slice(8, 10) + ' ' + month[(parseInt($("#dt0").text().slice(5, 7))-1)%12],
+			'<i class="blue travel icon"></i> 3 أيام عندكم ' + '- ' + days[(parseInt($("#day").val())+3)%7] + ' ' + $("#dt3").text().slice(8, 10) + ' ' + month[(parseInt($("#dt0").text().slice(5, 7))-1)%12],
+			'<i class="blue travel icon"></i> 4 أيام عندكم ' + '- ' + days[(parseInt($("#day").val())+4)%7] + ' ' + $("#dt4").text().slice(8, 10) + ' ' + month[(parseInt($("#dt0").text().slice(5, 7))-1)%12]]
 	var meteo = JSON.parse(localStorage.getItem('meteo')).data;
+	
 	
 	$("#bled").html(days[d]);
 	
