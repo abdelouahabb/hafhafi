@@ -1,16 +1,9 @@
 // https://mindgrader.com/tutorials/1-how-to-create-a-simple-javascript-countdown-timer
-
 if (window.localStorage.length > 0){
-	var noww = new Date(JSON.parse(localStorage.getItem('meteo')).now);
-	var ramdhan = new Date(JSON.parse(localStorage.getItem('meteo')).ramd);
-	var nisf = new Date(JSON.parse(localStorage.getItem('meteo')).nesf);
-	var aid = new Date(JSON.parse(localStorage.getItem('meteo')).aid);
-	var month = ["جانفي", "فيفري", "مارس", "أفريل", "ماي", "جوان", "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"]
+	
 	
 	function countdown(destination, id){
-		alert(noww);
 		var now = new Date();
-		alert(now);
 		
 		var target_date = new Date(destination).getTime();
 	
