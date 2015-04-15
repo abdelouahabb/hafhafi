@@ -185,10 +185,18 @@ $(document).ready(function(){
 		  }
 	  )});
 
-function ramadhan(){
-	countdown(ramdhan, "#ram");
-	countdown(nisf, "#nisf");
-	countdown(aid, "#aid");
-    $("#ramdhan").show();
-    $("#jeun").hide();
-}
+$(function() {
+	$('#jeun').click(function() {
+		window.noww = new Date(JSON.parse(localStorage.getItem('meteo')).now);
+		var ramdhan = new Date(JSON.parse(localStorage.getItem('meteo')).ramd);
+		var nisf = new Date(JSON.parse(localStorage.getItem('meteo')).nesf);
+		var aid = new Date(JSON.parse(localStorage.getItem('meteo')).aid);
+		window.month = ["جانفي", "فيفري", "مارس", "أفريل", "ماي", "جوان", "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"]
+
+		countdown(ramdhan, "#ram");
+		countdown(nisf, "#nisf");
+		countdown(aid, "#aid");
+		$("#ramdhan").show();
+		$("#jeun").hide();
+	})
+});
