@@ -1,9 +1,10 @@
 from setuptools import setup
 
-setup(name='meteodz',
-      version='2.0',
+setup(name='YourAppName',
+      version='1.0',
       description='OpenShift App',
       author='Your Name',
-      author_email='abdelouahab_al@yahoo.fr',
+      author_email='example@example.com',
       url='http://www.python.org/sigs/distutils-sig/',
+#      install_requires=['Django>=1.3'],
      )

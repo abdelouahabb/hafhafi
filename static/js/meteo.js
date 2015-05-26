@@ -1,10 +1,10 @@
 // i dont want to use external libraries like momentjs, because i will only use less than 5% of their option, so why not make the function ;)
 function Dessiner(){
 	var loops = [0,1,2,3,4];
-	var days = ["الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"];
+	var days = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
 	jour = parseInt($("#day").val());
 	$.each(loops, function(index, val) {  
-		$('#dessin').append('<div class="column"><div class="ui center aligned inverted segment"><div class="ui animated fade blue massive button" onclick="Dailer.call(this)" id='+index+'><div class="visible content d'+index+'">'+days[(jour+index)%7]+'</div><div class="hidden content ">طقس السمانة</div></div></div></div>');
+		$('#dessin').append('<div class="jour" onclick="Dailer.call(this)" id='+index+'><div class="d'+index+'">'+days[(jour+index)%7]+'</div></div>');
 		  });
 	$(".d0").prepend(" اليوم ");
 	$(".d1").prepend(" غدوة ");
@@ -38,8 +38,8 @@ function climat(code, isday, h){
 			'176':'<i class="cloudd"></i><i class="rainn"></i>' + (isday == "yes" && h < 3 ? '<i class="sun"></i>':'<i class="moon"></i>'),
 			'263':'<i class="cloudd"></i><i class="rainn"></i>' + (isday == "yes" && h < 3 ? '<i class="sun"></i>':'<i class="moon"></i>'),
 			
-			'116':'<i class="cloud"></i>' + (isday == "yes" && h < 3 ? '<i class="sun"></i>':'<i class="moon"></i>'),
-			'119':'<i class="cloud"></i>' + (isday == "yes" && h < 3 ? '<i class="sun"></i>':'<i class="moon"></i>'),
+			'116':'<i class="cloudd"></i>' + (isday == "yes" && h < 3 ? '<i class="sun"></i>':'<i class="moon"></i>'),
+			'119':'<i class="cloudd"></i>' + (isday == "yes" && h < 3 ? '<i class="sun"></i>':'<i class="moon"></i>'),
 			
 			'389':'<i class="cloudd"></i><i class="rainn"></i><i class="thunder"></i>',
 			
@@ -96,13 +96,13 @@ var d = 0;
 function Meteo(d) {
 	var d = (typeof d != 'undefined' ? d : 0 );
 	var month = ["جانفي", "فيفري", "مارس", "أفريل", "ماي", "جوان", "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"]
-	var days = ["الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"];
+	var days = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
 	parseInt($("#day").val())
-	var days = [ '<i class="blue travel icon"></i> نهار اليوم عندكم '+ '- ' + days[(parseInt($("#day").val()))%7] + ' ' + $("#dt0").text().slice(8, 10) + ' ' +  month[(parseInt($("#dt0").text().slice(5, 7))-1)%12],
-			'<i class="blue travel icon"></i> غدوة عندكم ' + '- ' + days[(parseInt($("#day").val())+1)%7] + ' ' + $("#dt1").text().slice(8, 10) + ' ' + month[(parseInt($("#dt0").text().slice(5, 7))-1)%12],
-			'<i class="blue travel icon"></i> بعد غدوة عندكم ' + '- ' + days[(parseInt($("#day").val())+2)%7] + ' ' + $("#dt2").text().slice(8, 10) + ' ' + month[(parseInt($("#dt0").text().slice(5, 7))-1)%12],
-			'<i class="blue travel icon"></i> 3 أيام عندكم ' + '- ' + days[(parseInt($("#day").val())+3)%7] + ' ' + $("#dt3").text().slice(8, 10) + ' ' + month[(parseInt($("#dt0").text().slice(5, 7))-1)%12],
-			'<i class="blue travel icon"></i> 4 أيام عندكم ' + '- ' + days[(parseInt($("#day").val())+4)%7] + ' ' + $("#dt4").text().slice(8, 10) + ' ' + month[(parseInt($("#dt0").text().slice(5, 7))-1)%12]]
+	var days = [ '<i class="travel"></i> نهار اليوم عندكم '+ '- ' + days[(parseInt($("#day").val()))%7] + ' ' + $("#dt0").text().slice(9, 11) + ' ' +  month[(parseInt($("#dt0").text().slice(6, 8))-1)%12],
+			'<i class="travel"></i> غدوة عندكم ' + '- ' + days[(parseInt($("#day").val())+1)%7] + ' ' + $("#dt1").text().slice(9, 11) + ' ' + month[(parseInt($("#dt0").text().slice(6, 8))-1)%12],
+			'<i class="travel"></i> بعد غدوة عندكم ' + '- ' + days[(parseInt($("#day").val())+2)%7] + ' ' + $("#dt2").text().slice(9, 11) + ' ' + month[(parseInt($("#dt0").text().slice(6, 8))-1)%12],
+			'<i class="travel"></i> ثلاثة أيام عندكم ' + '- ' + days[(parseInt($("#day").val())+3)%7] + ' ' + $("#dt3").text().slice(9, 11) + ' ' + month[(parseInt($("#dt0").text().slice(6, 8))-1)%12],
+			'<i class="travel"></i> أربعة أيام عندكم ' + '- ' + days[(parseInt($("#day").val())+4)%7] + ' ' + $("#dt4").text().slice(9, 11) + ' ' + month[(parseInt($("#dt0").text().slice(6, 8))-1)%12]]
 	var meteo = JSON.parse(localStorage.getItem('meteo')).data;
 	
 	
@@ -130,8 +130,8 @@ function Meteo(d) {
 		$("#e" + h).find(".rih").html(meteo.weather[d].hourly[h].windspeedKmph);
 		// sadly, switchClass doesent work! i dont know why, so the way to do it, is to remove, then add !
 		$("#e" + h).find("#w" + h).removeClass().addClass(meteo.weather[d].hourly[h].winddir16Point)
-		$("#e" + h).find(".temp").html(meteo.weather[d].hourly[h].tempC);
-		$("#e" + h).find(".hess").html(meteo.weather[d].hourly[h].FeelsLikeC);
+		$("#e" + h).find(".temp").html(meteo.weather[d].hourly[h].tempC + "°");
+		$("#e" + h).find(".hess").html(meteo.weather[d].hourly[h].FeelsLikeC + "°");
 		// this is where i call that looooong object of values, so you dont have to contact the server anymore!
 		$("#meteo"+h).html(climat(meteo.weather[d].hourly[h].weatherCode, meteo.weather[d].hourly[h].isdaytime, h))
 	}
@@ -141,3 +141,12 @@ function Meteo(d) {
 function Dailer() {
 	Meteo($(this).attr("id"));
 }
+
+function Plot(){
+	var meteo = JSON.parse(localStorage.getItem('meteo')).data;
+	var temp = [];
+	for (i=0; i<meteo.weather.length; i++){
+		temp.push(meteo.weather[i].hourly[2].tempC);
+	}			
+}
+

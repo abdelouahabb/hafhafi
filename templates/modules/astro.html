@@ -1,50 +1,40 @@
 
-<div class="ui five column stackable doubling grid">
+<div class="horloge">
+	<div class="time">
+		<i id="time"></i>
+	<hr />
+	</div>
+	
+	<div class="date">
+		<div id="ber" class="dt"></div>
+		<div id="isl" class="dt"></div>
+		<div id="fr" class="dt"></div>
+		<div id="en" class="dt"></div>
+	</div>
+</div>
+<div id="alrdy" style="display:none"></div>
+
+<div class="waqthandler">
 	{% for i in xrange(5) %}
 	
-	<div class="column">
-			<div class="astro ui inverted blue segment">
-				<div class="ui top attached black label c{{i}}">{{days[(jour+i)%7]}}<div id="dt{{i}}">{{res[i]["date"]}}</div></div>
-
-		<div class="ui grid">
-		
-			<div class="eight wide column">	
-				
-				<div class="ui row">
-					<div class="ui big label sunraise"><i class="riz">{{res[i]["astronomy"][0]["sunrise"]}}</i></div>
-				</div>
-				
-				<br/>
-				
-				<div class="ui row">
-					<div class="ui big label sunset"><i class="riz">{{res[i]["astronomy"][0]["sunset"]}}</i></div>
-				</div>
+	<div class="waqt">
 			
-			</div>
-			
-			<div class="ui vertical divider"><i class="inverted empty star icon"></i></div>
-			
-			<div class="eight wide column">	
-				
-				<div class="ui row">
-					<div class="ui big label moonraise"><i class="riz">{{res[i]["astronomy"][0]["moonrise"]}}</i></div>
-				</div>
-				
-				<br/>
-				
-				<div class="ui row">
-					<div class="ui big label moonset"><i class="riz">{{res[i]["astronomy"][0]["moonset"]}}</i></div>
-				</div>
-			
-			</div>
-
-		
+		<div class="youm">
+				<i class="c{{i}}">{{days[(jour+i)%7]}} <i id="dt{{i}}"> {{res[i]["date"]}}</i></i>
 		</div>
 		
-		
-		
-			
+		<div class="temps">
+		<div class="raise">
+		<div class="sunraise"><i class="riz">{{res[i]["astronomy"][0]["sunrise"]}}</i></div>
+		<div class="sunset"><i class="riz">{{res[i]["astronomy"][0]["sunset"]}}</i></div>
 		</div>
+		
+		<div class="set">
+		<div class="moonraise"><i class="riz">{{res[i]["astronomy"][0]["moonrise"]}}</i></div>
+		<div class="moonset"><i class="riz">{{res[i]["astronomy"][0]["moonset"]}}</i></div>
+		</div>
+		</div>	
+		
 	</div>
 
 
@@ -52,47 +42,37 @@
 
 </div>
 
+<div id="jeun" style="display:none">
+ وكتاش رمضان  <i class="mo"></i>
+</div>
 
 <div id="ramdhan" style="display:none">
 
-<div class="ui centered grid">
-
-<div class="five wide column">
-<div class="ui blue icon message">
-  <i class="mooon icon"></i>
+<div class="karim">
+ 
   <div class="content">
-    <div class="header" id="ram">
-      
-    </div>
+    <div id="ram"></div><hr />
     <p>يدخل هلال رمضان الكريم</p>
   </div>
-</div>
+
 </div>
 
-<div class="five wide column">
-<div class="ui blue icon message">
-  <i class="circle thin icon"></i>
+<div class="karim">
+  
   <div class="content">
-    <div class="header" id="nisf">
-      
-    </div>
+    <div id="nisf"></div><hr />
     <p>النصفية</p>
   </div>
-</div>
+
 </div>
 
-<div class="five wide column">
-<div class="ui blue icon message">
-  <i class="mooon icon"></i>
+<div class="karim">
+
   <div class="content">
-    <div class="header" id="aid">
-      
-    </div>
+    <div id="aid"></div><hr />
     <p>يدخل هلال شوال</p>
   </div>
-</div>
 
-</div>
 
 </div>
 

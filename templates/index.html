@@ -1,22 +1,50 @@
 {% include header.html %}
+<input id="youm" type="hidden" value="{{now[:10]}}">
+<input id="dhork" type="hidden" value="{{now[11:19]}}">
 
+{% module Modals() %}
 
+<div id="content">
+<div class="header">
 
-<div id="srf">
-{% raw xsrf_form_html() %}
-</div>
+<div class="droite">
 
-<div class="ui right aligned grid">
-	<div class="ui three wide column">
-	<div class="ui center aligned inverted orange segment">	
-		<div id="me" class="ui animated fade large inverted button">
-		  <div class="visible content">ڤول لي حاجة</div>
-		  <div class="hidden content">عبر عن شعورك</div>
-		</div>
+	<div class="donate">
+		<a href="https://github.com/abdelouahabb/hafhafi" target="_blank" class="don"><i class="github" title="for me on github!"></i></a>
+	 	<a href="#bitcoin" class="don" title="donate?" onclick="blury()"><i class="bitcoin"></i></a>
+	 	<a href="#litecoin" class="don" title="donate?" onclick="blury()"><i class="litcoin"></i></a>
+	</div>
+	
+	<div class="treedi">
+	<div class="bouton">
+	<a href="#contact" onclick="blury()">
+	<h1 class="visible">ڤول لي حاجة</h1>
+	</a>
+	<a href="#contact" onclick="blury()">
+	<h1 class="invisible">كليكي عليا</h1>
+	</a>
+	
 	</div>
 	</div>
 </div>
+
+<div class="lang">
+<div class="lng"><div class="en"><a href="#" title="English">0000</a></div></div>
+<div class="lng"><div class="fr"><a href="#" title="Français">0000</a></div></div>
+<div class="lng"><div class="dz"><a href="#" title="دارجة">0000</a></div></div>
+<div class="lng"><div class="ar"><a href="#" title="العربية">0000</a></div></div>
+<div class="lng"><div class="ka"><a href="#" title="Taqbaylit">0000</a></div></div>
+</div>
+
+<div class="ad">some ad here <i class="cofi"></i></div>
+
+
+
+</div>
+
 <br/>
+
+
 
 <div class="content">
 
@@ -30,20 +58,21 @@
 {% end %}
 
 
+
 {% module Astro(res) %}
 
 {% module Geo() %}
 
-<h1 class="ui horizontal header divider" id="bled">
-    <i class="blue travel icon"></i> 
+<h2 id="bled">
+<i class="dwn"> </i>
 اليوم في سطيـــف (هاذي ماشي معناه راك في سطيف، لازم تكليكي على جيب وين راني باش نجيبلك وين راك) 
- </h1>
+<i class="travel"> </i>
+</h2>
 
-<div class="ui fluid animated massive orange fade button" id="jeun" style="display:none">
-		<div class="visible content"> وكتاش رمضان ؟</div>
-		<div class="hidden content">النتيجة بالحسابات الفلكية</div>
-</div>
+
+
 <br/>
+
 
 {% module Detail(res) %}
 
@@ -51,8 +80,9 @@
 <div id="nocon"></div>
 </div>
 
-
+{#
 {% module Contact() %}
-
+#}
+</div>
 </body>
 </html>
