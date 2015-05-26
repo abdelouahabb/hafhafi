@@ -1,52 +1,31 @@
-<div class="ui three column stackable doubling grid">
+<div class="jawcontain">
 {% for i in xrange(1, 4) %}
-
-<div class="ui column">
-
-		<div class="forecast ui stacked inverted secondary segment" id="e{{i}}">
-			<h3 class="ui inverted blue big ribbon label"><i class="wait icon"></i>{{tps[i]}}</h3>		
-			<div class="ui top inverted attached segment">
-
-<div class="ui two column grid">
-
-	<div class="column">
-	{% module Jaw(code = res[0]["hourly"][i]["weatherCode"], sun=res[0]["hourly"][i]["isdaytime"]) %}
-	</div>
-
-	<div class="column">
 	
-	<ui>
-		<li class="shab"> مسحبة على <i class="nua">{{res[0]["hourly"][i]["cloudcover"] }}</i> %</li>
+	<div class="jaw" id="e{{i}}">
+	<div class="hala">
+	{% module Jaw(code = res[0]["hourly"][i]["weatherCode"], sun=res[0]["hourly"][i]["isdaytime"]) %}
+	
+	
+	<div class="har">
+		<i class="temp">{{res[0]["hourly"][i]["tempC"]}}°</i>
+		<div class="feel">تحس
+			<i class="hess">{{res[0]["hourly"][i]["FeelsLikeC"]}}°</i>
+		</div>
+	</div>
+	
+	</div>
+		
+	<ul class="info">
+		<li class="shab"> مسحبة على <i class="nua">{{res[0]["hourly"][i]["cloudcover"] }}</i> %</li>	
 		<li class="umbrel"> <i class="rai">{{res[0]["hourly"][i]["precipMM"] }}</i> ملمتر </li>
-		<li><i class="blue theme icon"></i> الميديتي <i class="medit">{{res[0]["hourly"][i]["humidity"] }}</i> % </li>
-		<li><i class="white unhide icon"></i> الرؤية على <i class="viz">{{res[0]["hourly"][i]["visibility"] }}</i> كيلومتر</li>
+		<li><i class="medity"></i> الميديتي <i class="medit">{{res[0]["hourly"][i]["humidity"] }}</i> % </li>
+		<li><i class="eye"></i> الرؤية على <i class="viz">{{res[0]["hourly"][i]["visibility"] }}</i> كيلومتر</li>
 		<li>الضغط بشدة  <i class="pres">{{res[0]["hourly"][i]["pressure"] }}</i> ميلي بار</li>
-		<li class="windd"> الريح بسرعة  <i class="rih">{{res[0]["hourly"][i]["windspeedKmph"] }}</i> كلم\ساعة </li>
+		<li class="windd"> الريح بسرعة  <i class="rih">{{res[0]["hourly"][i]["windspeedKmph"] }}</i> كلم\سا </li>
 		<li class="{{res[0]["hourly"][i]["winddir16Point"] }}" id="w{{i}}"> و يضرب على الجهة  </li>
 	</ui>
-	
-	</div>
 
-</div>
-			
-			
-	
-
-			</div>
-
-			<div class="ui inverted attached segment">
-			
-
-				<div class="ui right floated inverted statistic">
-					<div class="value">
-						<i class="thermo"></i>°<i class="temp">{{res[0]["hourly"][i]["tempC"]}}</i>
-					</div>
-					<div class="label">
-						بصح تحس <i class="hess">{{res[0]["hourly"][i]["FeelsLikeC"]}}</i>°
-					</div>
-				</div>
-			</div>
-		</div>
+		
 	</div>
 	
 {% end %}

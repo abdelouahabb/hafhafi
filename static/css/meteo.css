@@ -1,106 +1,111 @@
 @font-face {
 	  font-family: "weather";
-	  src: url("../fonts/WeatherIcons-Regular.woff"); /* http://erikflowers.github.io/weather-icons/ */
+	  src: url("../fonts/WeatherIcons.woff");
 	  font-weight: normal;
 	  font-style: normal;
 	}
 
-/** sunraise logo **/
-.astro::after{content:'\f046'; font-size: 1.5em;color: yellow; font-family: weather;position: absolute;font-style:normal;left: 5%;top: 1%;}
-
 /** sunraise **/
-.sunraise::before{content:'\f051'; font-size: 1em;color: #fbac13; font-family: weather;font-style:normal;position: relative;left: -5%;}
+.sunraise::before{content:'\efc3'; font-size: 1em;color: white; font-family: weather;font-style:normal;position: relative;left: -5%;}
 
 /** sunset **/
-.sunset::before{content:'\f052'; font-size: 1em;color: #fb5113; font-family: weather;font-style:normal;position: relative;left: -5%;}
+.sunset::before{content:'\efc4'; font-size: 1em;color: #fb5113; font-family: weather;font-style:normal;position: relative;left: -5%;}
 
 /**moonrise **/
-.moonraise::before{content:'\f02e'; font-size: 1em;color: #fbac13; font-family: weather;font-style:normal;position: relative;left: -5%;}
+.moonraise::before{content:'\efef'; font-size: 1em;color: white; font-family: weather;font-style:normal;position: relative;left: -5%;}
 
 /** moonset **/
-.moonset::before{content:'\f02e'; font-size: 1em;color: #fb5113; font-family: weather;font-style:normal;position: relative;left: -5%;}
+.moonset::before{content:'\efef'; font-size: 1em;color: #fb5113; font-family: weather;font-style:normal;position: relative;left: -5%;}
 
 /** ramadhan **/
-.ramdhan::before{content: '\f096'; font-size: 5em;position: absolute;right: 3%;top: -5%;color: white; font-family: weather;font-style:normal;-webkit-animation: moon 5s linear alternate infinite;animation: moon 5s linear alternate infinite;}
+.ramdhan::before{content: '\efee'; font-size: 5em;position: absolute;right: 3%;top: -5%;color: white; font-family: weather;font-style:normal;-webkit-animation: moon 5s linear alternate infinite;animation: moon 5s linear alternate infinite;}
 /** moon **/
-.moon::before{content:'\f02e'; font-size: 4em;color: cadetblue; font-family: weather;font-style:normal;position:absolute;top: -10%;left: 45%;-webkit-animation: moon 5s linear alternate infinite;animation: moon 5s linear alternate infinite;}
-.moonn::before{content:'\f02e'; font-size:5em;color: white; font-family: weather;font-style:normal;; top: -5%;right: 10%;-webkit-animation: moon 5s linear alternate infinite;animation: moon 5s linear alternate infinite;}
+.moon::before{content:'\efef'; font-size: 3em;color: cadetblue; font-family: weather;font-style:normal;position:absolute;top: -10%;left: 45%;-webkit-animation: moon 5s linear alternate infinite;animation: moon 5s linear alternate infinite;}
+.moonn::before{content:'\efef'; font-size: 4em;color: white; font-family: weather;font-style:normal;; position: relative;top: -5%;right: 10%;-webkit-animation: moon 5s linear alternate infinite;animation: moon 5s linear alternate infinite;}
 
 /** sun **/
-.sun::before{content:'\f00d'; font-size: 4em;color: #fbac13; font-family: weather;font-style:normal;position:absolute;top: -5%;left: 32%;-webkit-animation: rotation 5s linear infinite;animation: rotation 5s linear infinite}
+.sun::before{content:'\efbd'; font-size: 4em;color: #fbac13; font-family: weather;font-style:normal;position:absolute;top: -20%;left: 40%;-webkit-animation: rotation 5s linear infinite;animation: rotation 5s linear infinite}
 
 /** cloud **/
-.cloud::after{content:'\f041'; position: relative;z-index: 1;font-size: 5em; ; font-family: weather;font-style: normal;color: white;-webkit-animation: move 2s linear alternate infinite;animation: move 2s linear alternate}
+.cloud::after{content:'\efba'; position: relative;z-index: 1;top: 20px;font-size: 3em; ; font-family: weather;font-style: normal;color: white;-webkit-animation: move 2s linear alternate infinite;animation: move 2s linear alternate}
 
 /** dark cloud **/
-.cloudd::after{content:'\f00f'; font-size: 5em; ; font-family: weather;font-style: normal;color: #F0ECEC;position: relative;z-index: 1;}
+.cloudd::after{content:'\efbb'; font-size: 4em; ; font-family: weather;font-style: normal;color: #F0ECEC;position: relative;z-index: 1;}
 
 /** rain **/
-.rain::before{content:'\f05f'; font-size: 4em; ; font-family: weather;font-style: normal;position: absolute;left: 30%;top: 35%;color: rgb(82, 203, 255);animation: rain 1s linear infinite; -webkit-animation: rain 1s linear infinite;}
+.rain::before{content:'\efa3'; font-size: 3em; ; font-family: weather;font-style: normal;position: absolute;left: 45%;top: 35%;color: rgb(82, 203, 255);animation: rain 1s linear infinite; -webkit-animation: rain 1s linear infinite;}
 
 /** rain more **/
-.rainn::before{content:'\f04e'; font-size:5em; ; font-family: weather;font-style: normal;;color: rgb(82, 203, 255);position: absolute;left: 35%;top: 30%;animation: rainn 1s linear infinite; -webkit-animation: rainn 1s linear infinite;}
+.rainn::before{content:'\efa4'; font-size:3em; ; font-family: weather;font-style: normal;;color: rgb(82, 203, 255);position: absolute;left: 40%;top: 50%;animation: rainn 1s linear infinite; -webkit-animation: rainn 1s linear infinite;}
 
 /** rain mooooooooore **/
-.rainnn::before{content:'\f04f'; font-size:5em; ; font-family: weather;font-style: normal;;position: absolute;left: -2%;bottom: 0%;color: rgb(82, 203, 255);-webkit-animation: rainnn .6s linear infinite;animation: rainnn .6s linear infinite;}
+.rainnn::before{content:'\efa5'; font-size: 3em; ; font-family: weather;font-style: normal;;position: absolute;left: 30%;bottom: 0%;color: rgb(82, 203, 255);-webkit-animation: rainnn .6s linear infinite;animation: rainnn .6s linear infinite;}
 
 
 /** wind **/
-.wind::before{content:'\f050'; font-size:5em;color: #c3bcae; font-family: weather;font-style:normal;;-webkit-animation: wind .5s linear infinite alternate;animation: wind .5s linear infinite alternate}
+.wind::before{content:'\ef95'; font-size:3em;color: #c3bcae; font-family: weather;font-style:normal;;-webkit-animation: wind .5s linear infinite alternate;animation: wind .5s linear infinite alternate}
 
 /** thunder **/
-.thunder::after{content:'\f07f'; font-size: 3em; ; font-family: weather;font-style: normal;;opacity: 0.8;position: absolute;left: 20%;top: 30%;transform: rotate(15deg);color: yellow;-webkit-animation: thunder .7s  infinite;animation: thunder .7s ;}
+.thunder::after{content:'\efbe'; font-size: 3em; ; font-family: weather;font-style: normal;;opacity: 0.8;position: absolute;left: 38%;top: 50%;transform: rotate(15deg);color: yellow;-webkit-animation: thunder .7s  infinite;animation: thunder .7s ;}
 
 /** fog **/
-.fog::after{content:'\f063'; font-size:5em; ; font-family: weather;font-style: normal;;color: rgb(128, 128, 128);animation: fog 2s linear alternate infinite; -webkit-animation: fog 2s linear alternate infinite;}
+.fog::after{content:'\efa0'; font-size:5em; ; font-family: weather;font-style: normal;;color: rgb(128, 128, 128);animation: fog 2s linear alternate infinite; -webkit-animation: fog 2s linear alternate infinite;}
 
 /** sleet **/
-.vrour::before{content: '\f049'; font-size:5em; ; font-family: weather;font-style: normal;;position: absolute;left: 29%;top: 35%;transform: rotate(-15deg);color: rgb(255, 255, 255);animation: rain .6s linear infinite; -webkit-animation: rain .6s linear infinite;}
+.vrour::before{content: '\efa2'; font-size: 4em; ; font-family: weather;font-style: normal;;position: absolute;left: 30%;top: 65%;transform: rotate(-15deg);color: rgb(255, 255, 255);animation: rain .6s linear infinite; -webkit-animation: rain .6s linear infinite;}
 
 /** snow **/
-.snow::before{content:'\f020'; font-size:5em; ; font-family: weather;font-style: normal;;position: absolute;left: -10%;top: 20%;z-index: 1;transform: rotate(-15deg);color: snow;animation: snow 2s linear infinite; -webkit-animation: snow 2s linear infinite;}
+.snow::before{content:'\efa7'; font-size:4em; ; font-family: weather;font-style: normal;;position: absolute;left: 30%;top: 20%;z-index: 1;transform: rotate(-15deg);color: snow;animation: snow 2s linear infinite; -webkit-animation: snow 2s linear infinite;}
 
 /** snoooooow **/
 
-.snoww::before{content:'\f01f'; font-size:5em; ; font-family: weather;font-style: normal;;position: absolute;left: 8%;top: 25%;transform: rotate(-15deg);color: snow;animation: snow 2s linear infinite; -webkit-animation: snow 2s linear infinite;}
+.snoww::before{content:'\efa8'; font-size:4em; ; font-family: weather;font-style: normal;;position: absolute;left: 8%;top: 25%;transform: rotate(-15deg);color: snow;animation: snow 2s linear infinite; -webkit-animation: snow 2s linear infinite;}
 
 /** snowy rain **/
-.rainsnow::before{content:'\f03f'; font-size:5em; ; font-family: weather;font-style: normal;;position: absolute;left: 27%;top: 34%;z-index: 1;color: rgb(166, 221, 255);animation: rainn 1s linear infinite; -webkit-animation: rainn 1s linear infinite;}
+.rainsnow::before{content:'\efa6'; font-size: 4em; ; font-family: weather;font-style: normal;;position: absolute;left: 25%;top: 50%;z-index: 1;color: rgb(166, 221, 255);animation: rainn 1s linear infinite; -webkit-animation: rainn 1s linear infinite;}
 
 /** snow dust **/
-.dust::before{content:'\f06f'; font-size:5em;color: #FCFAF5; font-family: weather;position: absolute;left: 15%;top: 13%;font-style:normal;}
-.dust::after{content:'\f01f'; font-size:5em; ; font-family: weather;font-style: normal;;position: absolute;left: 8%;top: 25%; color: snow;animation: bliz 1s linear infinite; -webkit-animation: bliz 1s linear infinite;}
+.dust::before{content:'\ef95'; font-size:4em;color: #FCFAF5; font-family: weather;position: absolute;left: 15%;top: 13%;font-style:normal;}
+.dust::after{content:'\efa8'; font-size:4em; ; font-family: weather;font-style: normal;;position: absolute;left: 8%;top: 25%; color: snow;animation: bliz 1s linear infinite; -webkit-animation: bliz 1s linear infinite;}
 
 /** 113 sun **/
-.sunn::before{content:'\f00d'; font-size:5em;color: #fbac13; font-family: weather;font-style:normal; top: -5%;right: 10%;-webkit-animation: rotation 5s linear infinite;animation: rotation 5s linear infinite}
+.sunn::before{content:'\efbd'; font-size:5em;color: #fbac13; font-family: weather;font-style:normal;-webkit-animation: rotation 5s linear infinite;animation: rotation 5s linear infinite}
+
+/** humidity **/
+.medity::before{content:'\efa4';font-family: weather;color: rgb(129, 208, 255);}
+
+/** eye **/
+.eye::before{content:'\f06e';font-family: weather;color: rgb(129, 208, 255);}
 
 /** thermo **/
-.thermo::after{content:'\f055'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal;position: absolute;left: 105px;bottom: 20%;}
+.thermo::after{content:'\efb1'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal;position: initial;left: 105px;bottom: 20%;}
 .meteo{position: relative;display: inline-block;}
 .actuelle{position: relative;display: inline-block;font-size: 1em;}
 .meteopop{position: relative;display: inline-block;font-size: 0.4em;margin-left: -20%}
 
-.umbrel::after{content:'\f084'; font-size:1em;color: #fbac13; font-family: weather;font-style:normal}
+.umbrel::before{content:'\efb9'; font-size:1em;color: #fbac13; font-family: weather;font-style:normal}
 
-.windd::before{content:'\f050'; font-size:1em;color: #fbac13; font-family: weather;font-style:normal}
-.shab::before{content:'\f013'; font-size:1em;color: #fbac13; font-family: weather;font-style:normal}
+.windd::before{content:'\ef95'; font-size:1em;color: #fbac13; font-family: weather;font-style:normal}
+.shab::before{content:'\efbc'; font-size:1em;color: #fbac13; font-family: weather;font-style:normal}
 
-.E::after{content:'\f059'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
-.NNE::after{content:'\f05A'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
-.ENE::after{content:'\f05A'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
-.NE::after{content:'\f05A'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
-.NW::after{content:'\f05B'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
-.WNW::after{content:'\f05B'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
-.NNW::after{content:'\f05B'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
-.N::after{content:'\f05C'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
-.SE::after{content:'\f05D'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
-.ESE::after{content:'\f05D'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
-.SSE::after{content:'\f05D'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
-.SW::after{content:'\f05E'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
-.SSW::after{content:'\f05E'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
-.WSW::after{content:'\f05E'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
-.S::after{content:'\f060'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
-.W::after{content:'\f061'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.E::after{content:'\ef97'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.SE::after{content:'\ef98'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.ESE::after{content:'\ef98'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.SSE::after{content:'\ef98'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.S::after{content:'\ef99'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.SW::after{content:'\ef9a'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.SSW::after{content:'\ef9a'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.WSW::after{content:'\ef9a'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.W::after{content:'\ef9b'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.NW::after{content:'\ef9c'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.WNW::after{content:'\ef9c'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.NNW::after{content:'\ef9c'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.N::after{content:'\ef9d'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.NNE::after{content:'\ef9e'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.ENE::after{content:'\ef9e'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+.NE::after{content:'\ef9e'; font-size:2em;color: #fbac13; font-family: weather;font-style:normal}
+
+
 
 
 

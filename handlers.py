@@ -52,7 +52,7 @@ class IndexHandler(MainHandler):
                     fox = ""
                     if self.name == "Firefox":
                         fox = "fox"
-                    response = yield http_client.fetch("http://ip-api.com/json/{0}".format(self.remote_ip))
+                    response = yield http_client.fetch("http://ip-api.com/json/{0}".format(self.remote_ip)) # use this when you deploy
                     res = json_decode(response.body)
                     info = [res["countryCode"], res["country"], res["isp"]]
                     yield db.visit.update({"_id":self.remote_ip},

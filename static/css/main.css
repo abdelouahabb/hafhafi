@@ -1,13 +1,144 @@
-i{font-style:normal}
-.content{direction:rtl; margin-left:2%; margin-right:2%}
+@font-face {
+	  font-family: "berber";
+	  src: url("../fonts/Tinos.woff");
+	  font-weight: normal;
+	  font-style: normal;
+	}
 
+@font-face {
+	  font-family: "arabic";
+	  src: url("../fonts/DroidSansArabic.woff");
+	  font-weight: normal;
+	  font-style: normal;
+	}
+	
+body{font-family: berber, arabic; background-image: url("../img/clouds.jpg");background-attachment: fixed;}
+.lang {display: flex;flex-direction: row;flex-basis: 40%;justify-content: space-around;}
+.lng {width: 4em;transition: transform .5s}
+.en {border: blue solid 2px;padding: 2%;border-radius: 10px;font-size: 2em;background-image: url("../img/flags.png");background-size: 100%;background-position-y: 75%;background-repeat: no-repeat;}
+.fr {border: blue solid 2px;padding: 2%;border-radius: 10px;font-size: 2em;background-image: url("../img/flags.png");background-size: 100%;background-position-y: 0%;background-repeat: no-repeat;}
+.dz {border: blue solid 2px;padding: 2%;border-radius: 10px;font-size: 2em;background-image: url("../img/flags.png");background-size: 100%;background-position-y: 50%;background-repeat: no-repeat;}
+.ar {border: blue solid 2px;padding: 2%;border-radius: 10px;font-size: 2em;background-image: url("../img/flags.png");background-size: 100%;background-position-y: 25%;background-repeat: no-repeat;}
+.ka {border: blue solid 2px;padding: 2%;border-radius: 10px;font-size: 2em;background-image: url("../img/flags.png");background-size: 100%;background-position-y: 100%;background-repeat: no-repeat;}
+.lng a {color: rgba(0, 0, 0, 0);}
+#bitcoin, #litecoin {display: none;background-color: rgb(253, 191, 77);border: gray solid 5px;font-size: 3em;font-family: monospace;border-radius: 10px;padding: 2%;position: absolute;left: 50%;transform: translate(-50%);z-index: 10;text-align: center;}
+.bigbtn{cursor: pointer;text-align: center;color: white;background: -webkit-linear-gradient(top, #2387ba 29%,#99c4e5 100%);background: -moz-linear-gradient(top, #2387ba 29%, #99c4e5 100%);border: rgb(128, 128, 128) solid 4px;border-radius: 10px;opacity: .8; transition: all .5s;}
+.submit {font-size: 3em;padding: 3%;position: relative;margin: auto;display: block;transition: background-color .5s;background-color: rgb(251, 81, 19);font-family: berber, arabic;cursor: pointer;}
+#lguit {border: rgb(117, 193, 255) solid 5px;border-radius: 5px;background-color: rgba(112, 176, 215, 0.5);}
+.jour {background-color: rgb(117, 193, 255);flex-basis: 15%;text-align: center;border: gray solid 3px;border-radius: 5px;font-size: 2em;padding: 1%;cursor: pointer;transition: background-color .7s}
+#jeun {text-align: center;background: -webkit-linear-gradient(top, #15346b 0%,#7ac5e2 100%);background: -moz-linear-gradient(top, #15346b 0%, #7ac5e2 100%); font-size: 3em;color: ghostwhite;margin-top: 1%;border: white solid 3px;border-radius: 10px;cursor: pointer;padding: .5%;opacity: 0.8;transition: opacity .5s;}
+#bled {text-align: center;background-color: rgb(117, 193, 255);border-radius: 20px;box-shadow: rgb(89, 59, 59) 5px 5px 2px;padding: .5%;cursor: not-allowed;}
+@media (max-width:1289px)
+{
+#dessin {display: flex;flex-direction: column;justify-content: space-around;}
+.droite {display: flex;flex-direction: column-reverse;height: 110%;position: relative;top: -5px;flex-basis: 20%;background-color: white;border: orange solid 2px;border-radius: 10px;}
+.donate{font-size: 2.2em;text-align: center;flex-basis: 50%;display: flex;justify-content: center;}
+.treedi {perspective: 1000px;flex-basis: 40%;position: relative;top: -30%;}
+.visible {background-color: orange;text-align: center;border-radius: 10px;}
+.invisible {display:none}
+.waqthandler {display: flex;flex-direction: column}
+.waqt {flex-basis: 18%;border: gray solid 5px;background-color: rgb(117, 193, 255);}
+.youm {text-align: center;background-color: black;color: white;}
+.temps {display: flex;flex-direction: row;justify-content: space-around;font-size: 2.6em;}
+.riz {font-family: monospace;font-size: 1.2em;}
+.jawcontain {display: flex;flex-direction: column;justify-content: space-between;border: white solid 7px;border-radius: 23px;}
+.jaw {background-color: rgb(24, 24, 24);border-radius: 5%;display: flex;flex-direction: row;padding-top: 2%;padding-bottom: 5%;border: 10px solid rgb(0, 151, 255);justify-content: space-around;}
+.hala {border: white solid 2px;padding-left: 10%;border-radius: 5%;margin-right: 2%;display: flex;flex-basis: 40%;flex-direction: column;background: black;justify-content: space-around;}
+.info {list-style: none;margin-top: 12%;margin-right: -10%;font-size: 1.9em;background: rgb(4, 19, 52);border-radius: 15%;border: white solid;color: white;flex-basis: 45%;transform: perspective(500px) translateY(-40px);transition: transform 1s}
+.info:hover{transform: translateZ(100px)}
+li {margin-top: 5%;}
+.temp {font-size: 10em;font-family: monospace;}
+.meteo{position: relative;display: inline-block;font-size: 4em;left: -20%;top: 35px;}
+.hess {font-family: monospace;font-size: 5em;}
+#ramdhan {display: flex;flex-direction: column;}
+}
+
+@media (min-width:1290px)
+{
+#dessin {display: flex;flex-direction: row;justify-content: space-around;}
+#jeun:hover{opacity: 1}
+.bigbtn:hover {opacity: 1;color: rgb(0, 58, 139);}
+.submit:hover {background-color: orange}
+.lng:hover{transform: translateY(-5px);}
+.jour:hover{background-color: rgb(255, 232, 134)}
+.droite {display: flex;flex-direction: column-reverse;position: relative;top: -5%;height: 110%;flex-basis: 15%;background-color: white;border: orange solid 2px;border-radius: 10px;}
+.donate{font-size: 2.2em;text-align: center;flex-basis: 50%;display: flex;justify-content: center;}
+.treedi {perspective: 1000px;flex-basis: 40%;position: relative;top: -48%;}
+.bouton {transform-style: preserve-3d;transform: rotateX(90deg);-webkit-transition: transform .3s cubic-bezier(0.1, 0.58, 0.48, 0.87);flex-basis: 100%;}
+.bouton:hover{transform: rotateX(0deg) translateY(-3%);}
+.visible {transform: rotateX(-90deg) translateZ(0px) translateY(0px);transform-origin: 0% 95%;background-color: orange;text-align: center;border-radius: 10px}
+.invisible {position: relative;top: -50px;background-color: orange;text-align: center;border-radius: 10px}
+.waqthandler {display: flex;flex-direction: row;justify-content: space-between;}
+.waqt {flex-basis: 18%;border: gray solid 5px;border-radius: 10%;background-color: rgb(117, 193, 255);}
+.youm {text-align: center;background-color: black;color: white;}
+.temps {display: flex;flex-direction: row;justify-content: space-around;font-size: 1.6em;margin-top: 2%;}
+.riz {font-family: monospace;font-size: 1.2em;}
+.jawcontain {display: flex;flex-direction: row;justify-content: space-between;border: white solid 7px;border-radius: 23px;}
+.jaw {background-color: rgb(24, 24, 24);border-radius: 5%;flex-basis: 31.5%;display: flex;flex-direction: row;padding-top: 2%;padding-bottom: 5%;border: 10px solid rgb(0, 151, 255);justify-content: space-around;}
+.hala {border: white solid 2px;padding-left: 10%;border-radius: 5%;margin-right: 2%;display: flex;flex-direction: column;background: black;justify-content: space-around;}
+.info {list-style: none;margin-right: -10%;background: rgb(4, 19, 52);border-radius: 15%;border: white solid;color: white;transform: perspective(500px) translateY(-40px);transition: transform 1s}
+.info:hover{transform: translateZ(100px)}
+li {margin-top: 5%;margin-right: -10%;}
+.temp {font-size: 6em;font-family: monospace;}
+.meteo{position: relative;display: inline-block;font-size: 1.5em;left: -10%;top: 35px;}
+.hess {font-family: monospace;font-size: 3em;}
+#ramdhan {display: flex;flex-direction: row;justify-content: space-around;}
+}
+.karim {border: cadetblue solid 3px;border-radius: 5px;flex-basis: 30%;padding: .5%;text-align: center;background: -webkit-linear-gradient(top, #314568 0%,#000000 100%);background: -moz-linear-gradient(top, #314568 0%, #000000 100%);color: floralwhite;font-size: 1.1em;margin-top: 1%;}
+.horloge {display: flex;flex-direction: column;text-align: center;background-color: black;border: rgb(117, 193, 255) solid 3px;border-radius: 20px;}
+.date {display: flex;flex-direction: row;justify-content: space-around;}
+.dt{font-size: 1.4em;font-family: monospace;color: white;padding-bottom: 10px;flex-basis: 25%;}
+.dt:not(#en){border-left: white solid 2px; height: 15px;}
+.travel::after{content:'\f0b1'; font-family: weather;color: gray;position: relative;top: 5px;}
+.clock::after{content:'\f017'; font-family: weather;color: orange;position: relative;top: 5px;font-size: 7em;}
+.tps {font-size: 3em;font-family: monospace;color: greenyellow;}
+.t {flex-basis: 25%;border: white solid 1px;}
+.dwn::after{content:'\f0a7'; font-family: weather;color: gray;position: relative;top: 5px;}
+.weli {display: flex;flex-direction: row;}
+.dr {flex-basis: 20%;text-align: center;}
+.gch {flex-basis: 80%;text-align: center;}
+.ho {display: flex;flex-direction: row;justify-content: space-around;}
+i{font-style:normal}
+.content{direction:rtl}
+.har {color: white;margin-top: 30%;margin-right: 5%;text-align: center;}
+#time {font-size: 5em;color: greenyellow;font-family: monospace;cursor: context-menu;}
 path {color: red;transition: all 1s;}
 path:hover {fill: black;stroke: white;}
-.meteo{position: relative;display: inline-block;font-size: 1.4em}
-ui.popup>ui.column{background-color: blue;}
+.header {display: flex;flex-direction: row;justify-content: space-between;padding: 1%;border: blue solid 2px;border-radius: 10px;height: 5em;}
+.ad{background-color: white;flex-basis: 45%;border-radius: 5px;text-align: center;font-size: 3em;}
+.contact {flex-basis: 20%;text-align: center;background-color: orange;border-radius: 15px;}
+.github::before{content:'\f09b';color: black; font-family: weather;-webkit-transition: color .3s linear;}
+.github:hover::before{content:'\f09b';color: rgb(0, 139, 255); font-family: weather;}
+.bitcoin::before{content: url("../img/bc.png");position: relative;top: 3px;-webkit-transition: transform .3s linear;}
+.bitcoin:hover::before{transform: rotate(5deg)}
+.litcoin::before {content: url("../img/lc.png");position: relative;top: 3px;-webkit-transition: transform .3s linear;}
+.litcoin:hover::before{transform: rotate(5deg)}
+.close::after{content:'\f00d'; font-family: weather;font-size: 1.5em;position: relative;left: 48%;bottom: 25px;color: white;}
+.spy::after{content:"\f21b"; font-family: weather;font-size: 5em;color: black;padding: 1%;}
+.don{text-decoration: none;flex-basis: 45%;margin-top: 1%;}
+#bitcoin:target{display: flex;flex-direction: column-reverse;}
+#litecoin:target{display: flex;flex-direction: column-reverse;}
+#contact{display:none}
+#contact:target{display: flex;flex-direction: row;position: absolute;top: 50%;left: 50%;transform: translate(-50%);z-index: 10;background-color: orange;border-radius: 10px;padding: 1%;}
+#wait {position: absolute;z-index: 10;background-color: white;padding: 2%;border: blue solid 5px;border-radius: 10px;top: 50%;left: 50%;transform: translate(-50%);}
+#succes{display:none}
+#succes:target{display: flex;flex-direction: row-reverse;position: absolute;top: 50%;left: 50%;transform: translate(-50%);z-index: 10;background-color: white;border-radius: 10px;padding: 2%;border: orange solid 5px;}
+.weli {position: relative;background-color: black;color: white;padding: 1%;border: rgb(74, 100, 138) solid 5px;border-radius: 9px;}
+.liker {display: inline-block;text-align: center;}
+.send {margin-top: 2%;}
+.btn {font-size: 2em;border-radius: 10px;padding: 2%;background-color: yellow;transition: background-color .5s}
+.btn:hover{background-color: orange;}
+.adr {margin-top: 3%;}
+.comment::before{content:'\f0e5';color: rgb(0, 139, 255); font-family: weather;font-size: 2em;padding: 1%;}
+textarea {font-size: 2em;font-family: berber, arabic;margin-top: 2%;}
+.qqc {position: relative;top: 10px;}
+.heart::after{content:'\f004';color: red; font-family: weather;font-size: 8em;padding: 1%;}
+.sad::after{content:'\f119';color: orange; font-family: weather;font-size: 8em;padding: 1%;}
+.mad::after{content:'\f119';color: red; font-family: weather;font-size: 8em;padding: 1%;}
+.like::after{content:'\f087';color: gray; font-family: weather;font-size: 8em;padding: 1%;}
+.dislike::after{content:'\f165';color: red; font-family: weather;font-size: 8em;padding: 1%;}
+.cofi::after{content:'\f0f4';color: chocolate; font-family: weather;padding: 1%;position: relative;}
 
 .forecast{ transition: all .6s }
 .forecast:hover {transform: translateY(-5%)}
-
-.astr.ui.three.wide.column{transition: all .5s}
-.astr.ui.three.wide.column:hover{transform:translateY(5%)}
+.mo::before{content: '\f186'; color: white; font-family: weather;font-style:normal;; position: relative;-webkit-animation: moon 5s linear alternate infinite;animation: moon 5s linear alternate infinite;}

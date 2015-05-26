@@ -1,0 +1,49 @@
+<div class="modals">
+
+
+	<div id="bitcoin">
+		<span class="adr"><i class="bitcoin">1KaDAbaFk16vZdHzLnhPAK9Sj3YtYjUKSG </i></span> 
+		<img src="{{ static_url('img/bit.svg') }}" />
+		<a href="#content" class="don" title="close" onclick="unblury()"><i class="close"></i></a>
+	</div>
+
+	<div id="litecoin">
+		<span class="adr"><i class="litcoin">LNSSCm5UZuAhjRsbi7AWLzh7499C1P6ZAW </i> </span> 
+		<img src="{{ static_url('img/bit.svg') }}" /> 
+		<a href="#content" class="don" title="close" onclick="unblury()"><i class="close"></i></a>
+	</div>
+
+	<div id="contact">
+		<div class="send">
+		<form method="post" action="/msg" id="feedb" >
+		{% raw xsrf_form_html() %}
+		<label for="msg" class="comment">عير عن شعورك يا مواطن</label>
+		<textarea name="msg" cols="40" rows="10" id="msg" required minlength="6" title="زيد أهدر"></textarea>
+		<input type="submit" value="أبعث" class="btn"/>
+		</form>
+		</div>
+		<div class="qqc">
+		<a href="#content" class="don" title="close" onclick="unblury()"><i class="close"></i></a>
+		</div>
+	</div>
+	
+	<div id="succes">
+	<div class="qqc">
+	<a href="#content" class="don" title="close" onclick="unblury()"><i class="close"></i></a>
+	</div>
+	
+	<div class="liker">
+	</div>
+	</div>
+	
+	<div id="wait" style="display:none">
+	<img src="{{ static_url('img/iori.gif') }}" alt="wait" />
+		<h1>اصبر راني نحوسلك</h1>
+	</div>
+	
+	
+
+</div>
+
+
+
