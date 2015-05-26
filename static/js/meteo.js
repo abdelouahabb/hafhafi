@@ -1,7 +1,7 @@
 // i dont want to use external libraries like momentjs, because i will only use less than 5% of their option, so why not make the function ;)
 function Dessiner(){
 	var loops = [0,1,2,3,4];
-	var days = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+	var days = [ "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"];
 	jour = parseInt($("#day").val());
 	$.each(loops, function(index, val) {  
 		$('#dessin').append('<div class="jour" onclick="Dailer.call(this)" id='+index+'><div class="d'+index+'">'+days[(jour+index)%7]+'</div></div>');
@@ -96,7 +96,7 @@ var d = 0;
 function Meteo(d) {
 	var d = (typeof d != 'undefined' ? d : 0 );
 	var month = ["جانفي", "فيفري", "مارس", "أفريل", "ماي", "جوان", "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"]
-	var days = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+	var days = [ "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"];
 	parseInt($("#day").val())
 	var days = [ '<i class="travel"></i> نهار اليوم عندكم '+ '- ' + days[(parseInt($("#day").val()))%7] + ' ' + $("#dt0").text().slice(9, 11) + ' ' +  month[(parseInt($("#dt0").text().slice(6, 8))-1)%12],
 			'<i class="travel"></i> غدوة عندكم ' + '- ' + days[(parseInt($("#day").val())+1)%7] + ' ' + $("#dt1").text().slice(9, 11) + ' ' + month[(parseInt($("#dt0").text().slice(6, 8))-1)%12],
