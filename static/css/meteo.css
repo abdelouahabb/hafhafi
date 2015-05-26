@@ -9,10 +9,16 @@
 .astro::after{content:'\f046'; font-size: 1.5em;color: yellow; font-family: weather;position: absolute;font-style:normal;left: 5%;top: 1%;}
 
 /** sunraise **/
-.sunraise::before{content:'\f051'; font-size: 1em;color: #fbac13; font-family: weather;font-style:normal}
+.sunraise::before{content:'\f051'; font-size: 1em;color: #fbac13; font-family: weather;font-style:normal;position: relative;left: -5%;}
 
 /** sunset **/
-.sunset::before{content:'\f052'; font-size: 1em;color: #fb5113; font-family: weather;font-style:normal}
+.sunset::before{content:'\f052'; font-size: 1em;color: #fb5113; font-family: weather;font-style:normal;position: relative;left: -5%;}
+
+/**moonrise **/
+.moonraise::before{content:'\f02e'; font-size: 1em;color: #fbac13; font-family: weather;font-style:normal;position: relative;left: -5%;}
+
+/** moonset **/
+.moonset::before{content:'\f02e'; font-size: 1em;color: #fb5113; font-family: weather;font-style:normal;position: relative;left: -5%;}
 
 /** ramadhan **/
 .ramdhan::before{content: '\f096'; font-size: 5em;position: absolute;right: 3%;top: -5%;color: white; font-family: weather;font-style:normal;-webkit-animation: moon 5s linear alternate infinite;animation: moon 5s linear alternate infinite;}

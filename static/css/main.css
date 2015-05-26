@@ -1,6 +1,5 @@
 i{font-style:normal}
-.content{direction:rtl}
-.main.container{width: 1200px;margin: 0 auto;background-color: rgb(255,255,255);border-radius: 5px;font-family:iconvault} /* use this trick to center your elements ;) */
+.content{direction:rtl; margin-left:2%; margin-right:2%}
 
 path {color: red;transition: all 1s;}
 path:hover {fill: black;stroke: white;}
