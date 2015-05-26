@@ -3,13 +3,11 @@
 import tornado.ioloop
 import tornado.httpserver
 from tornado.options import define, options
-import handlers, os
+import handlers,os
 
 
-#ip   = os.environ['OPENSHIFT_PYTHON_IP']
-#port = int(os.environ['OPENSHIFT_PYTHON_PORT'])
-define("port",default=8000,type=int)
-define("address",default="localhost") 
+ip   = os.environ['OPENSHIFT_PYTHON_IP']
+port = int(os.environ['OPENSHIFT_PYTHON_PORT'])
 # if you want to test on your machine, avoid localhost, use your wifi address,
 # so you can test easily offline app, by stopping the server.
 
@@ -38,6 +36,7 @@ settings = dict({
     {'Detail': handlers.DetailModule,
      'Jaw': handlers.JawModule,
      'Astro': handlers.AstroModule,
+     'Modals': handlers.Modals,
      'Geo': handlers.Geo,
      'Contact': handlers.Contact,
     }
@@ -50,6 +49,5 @@ application = tornado.web.Application(urls,**settings)
 if __name__ == "__main__":
     options.parse_command_line()
     server = tornado.httpserver.HTTPServer(application)
-    server.listen(options.port, options.address) # uncomment this if you use your wifi address so you can test better
-    #server.listen(port, ip)
+    server.listen(port, ip)
     tornado.ioloop.IOLoop.instance().start()

@@ -1,29 +1,50 @@
 
 <div class="ui five column stackable doubling grid">
 	{% for i in xrange(5) %}
-	<div class="ui column">
-		<div class="astr ui three wide column">
+	
+	<div class="column">
 			<div class="astro ui inverted blue segment">
-				<div class="ui top attached black label c{{i}}">
-					{{days[(jour+i)%7]}}
-					<div id="dt{{i}}">{{res[i]["date"]}}</div>
+				<div class="ui top attached black label c{{i}}">{{days[(jour+i)%7]}}<div id="dt{{i}}">{{res[i]["date"]}}</div></div>
+
+		<div class="ui grid">
+		
+			<div class="eight wide column">	
+				
+				<div class="ui row">
+					<div class="ui big label sunraise"><i class="riz">{{res[i]["astronomy"][0]["sunrise"]}}</i></div>
 				</div>
-				<div>&nbsp;</div>
-				<div class="ui label sunraise">
-					<div class="detail">
-						<i id="riz{{i}}">{{res[i]["astronomy"][0]["sunrise"][:-3]}}</i>
-					</div>
+				
+				<br/>
+				
+				<div class="ui row">
+					<div class="ui big label sunset"><i class="riz">{{res[i]["astronomy"][0]["sunset"]}}</i></div>
 				</div>
-				<div class="ui label sunset">
-					<div class="detail">
-						<i id="set{{i}}">{{str(datetime.datetime.strptime(res[i]["astronomy"][0]["sunset"],
-							"%I:%M %p"))[11:-3]}}</i>
-					</div>
-				</div>
+			
 			</div>
+			
+			<div class="ui vertical divider"><i class="inverted empty star icon"></i></div>
+			
+			<div class="eight wide column">	
+				
+				<div class="ui row">
+					<div class="ui big label moonraise"><i class="riz">{{res[i]["astronomy"][0]["moonrise"]}}</i></div>
+				</div>
+				
+				<br/>
+				
+				<div class="ui row">
+					<div class="ui big label moonset"><i class="riz">{{res[i]["astronomy"][0]["moonset"]}}</i></div>
+				</div>
+			
+			</div>
+
+		
 		</div>
-
-
+		
+		
+		
+			
+		</div>
 	</div>
 
 

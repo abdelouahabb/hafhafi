@@ -21,17 +21,16 @@ if (window.localStorage.length > 0){
 		    minutes = parseInt( seconds_left / 60 );
 		    seconds = parseInt( seconds_left % 60 );
 		    
-		    $(id).html( "راك طلبت المعلومة هاذي على  " + 
-		    		noww.toLocaleString("us").split(" ")[1] + "<br/>" +
+		    $(id).html('حسب الساعة تاعك :<br/>'+
 		    		'مازال ' +
 		    		days + ' يوم ' +
 		    		hours + ' ساعة ' +
 		    		minutes + ' دقيقة ' +
 		    		seconds + ' ثانية ' +
 		    		' <br/> يعني ' +
-		    		Intl.DateTimeFormat("ar", {weekday: "long", year: "numeric", month: "long", day: "numeric"}).format(destination).split(" ")[0].split("،")[0] + " " +
-		    		destination.toLocaleString("us").split(" ")[0].split("/")[0] + " " +
-		    		month[parseInt(destination.toLocaleString("us").split(" ")[0].split("/")[1])-1] +
+		    		day[destination.getDay()] + " " +
+		    		destination.getDate() + " " +
+		    		month[destination.getMonth()] +
 		    		" على " +
 		    		destination.toLocaleString("us").split(" ")[1]
 		    		);

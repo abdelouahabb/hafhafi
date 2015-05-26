@@ -1,3 +1,4 @@
+// hi
 // delete the button after the user got his json file, so the server is freed
 function enableButton(){$('#meteor').removeAttr('disabled')}; 
 // this is where the magic of geolocalisation happens!
@@ -187,11 +188,12 @@ $(document).ready(function(){
 
 $(function() {
 	$('#jeun').click(function() {
-		window.noww = new Date(JSON.parse(localStorage.getItem('meteo')).now);
 		var ramdhan = new Date(JSON.parse(localStorage.getItem('meteo')).ramd);
 		var nisf = new Date(JSON.parse(localStorage.getItem('meteo')).nesf);
 		var aid = new Date(JSON.parse(localStorage.getItem('meteo')).aid);
-		window.month = ["جانفي", "فيفري", "مارس", "أفريل", "ماي", "جوان", "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"]
+		window.day = ["الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"];
+		window.month = ["جانفي", "فيفري", "مارس", "أفريل", "ماي", "جوان", "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
+		
 
 		countdown(ramdhan, "#ram");
 		countdown(nisf, "#nisf");
@@ -200,3 +202,22 @@ $(function() {
 		$("#jeun").hide();
 	})
 });
+
+// this is the function that will convert pm to 24h system used in Algeria ...
+function timer(c){
+	for (i = 0; i < $(c).length; i++){
+		if ($(c)[i].innerHTML.split(" ")[1]=="PM") {
+			$(c)[i].innerHTML = parseInt($(c)[i].innerHTML.split(" ")[0].split(":")[0])+12 + ":" + $(c)[i].innerHTML.split(" ")[0].split(":")[1];
+		}
+		else {
+			$(c)[i].innerHTML = $(c)[i].innerHTML.split(" ")[0]
+		}
+		};
+}
+
+
+$(function() {
+		timer(".riz");
+	
+	
+})

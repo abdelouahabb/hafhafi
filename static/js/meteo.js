@@ -108,17 +108,18 @@ function Meteo(d) {
 	
 	$("#bled").html(days[d]);
 	
-//	$("#lguit").html('<div class="ui blue icon message"><i class="find icon"></i><div class="content"><div class="header">على حساب الشوفة راك ڤريب من ولاية   ' + meteo.nearest_area[0].region[0].value + '</div></div></div>');
-	
-	// from AM PM to normal time, note that you can use momentjs library, but since we know that sunset is always pm,
-	// that means that we just add 12, to use momentjs: var sunset = moment("07:02 PM", ["h:mm A"]); alert(sunset.format("HH:mm"));
+// because we work with classes, so the easiest way, is to make the array and push it again ;)
+	horo = []
 	for (i = 0; i < 5; i++) {
-		var sunrise = meteo.weather[i].astronomy[0].sunrise.substr(0, 5);
-		var time = meteo.weather[i].astronomy[0].sunset.substr(0, 5);
-		var sunset = parseInt(time.substr(0, 2)) + 12 + ":" + time.substr(3,5);
-		$("#riz"+i).html(sunrise);
-		$("#set"+i).html(sunset);
+		horo.push(meteo.weather[i].astronomy[0].sunrise);
+		horo.push(meteo.weather[i].astronomy[0].sunset);
+		horo.push(meteo.weather[i].astronomy[0].moonrise);
+		horo.push(meteo.weather[i].astronomy[0].moonset);			
 	}
+	for (j = 0; j < horo.length; j++){
+		$(".riz")[j].innerHTML = horo[j]
+	}
+	timer(".riz");
 	// this is where values are taken from localStorage, and write them on the page, so, no need to contact the server again!
 	for (h = 1; h < 4; h++) {
 		$("#e" + h).find(".nua").html(meteo.weather[d].hourly[h].cloudcover);
