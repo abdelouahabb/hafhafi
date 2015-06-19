@@ -23,7 +23,7 @@ urls = [
     (r"/comments", handlers.Comments),
     (r"/iedanger", handlers.IE),
     (r"/bsod", handlers.BSOD),
-    (r"/(.*)", tornado.web.StaticFileHandler, {"path":r"{0}".format(os.path.join(os.path.dirname(__file__),"static"))}),,
+    (r"/(.*)", tornado.web.StaticFileHandler, {"path":r"{0}".format(os.path.join(os.path.dirname(__file__),"static"))}),
 ]
 
 settings = dict({
